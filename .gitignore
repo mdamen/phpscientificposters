@@ -2,3 +2,5 @@
 .env.*.php
 .env.php
 .env
+
+/public/uploads
