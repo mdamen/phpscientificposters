@@ -7,9 +7,7 @@ use App\Models\File;
 use App\Repositories\File\FileRepositoryInterface;
 use Input;
 use Validator;
-use Redirect;
 use Request;
-use Session;
 use Response;
 
 /**
@@ -46,7 +44,7 @@ class FileController extends Controller
 	 * @param Request 	$request
 	 * @param Poster	$poster
 	 *
-	 * @return Response
+	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function upload(Request $request, Poster $poster)
 	{
@@ -77,7 +75,7 @@ class FileController extends Controller
 				$fileName = $file_obj->id . '.' . $originalExtension; // renameing image
 				Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
 				
-				return Response::json('success', 200);;
+				return Response::json('success', 200);
 			} else {
 				return Response::json('error', 400);
 			}
@@ -88,7 +86,7 @@ class FileController extends Controller
 	 * @param Request 	$request
 	 * @param File		$file
 	 *
-	 * @return Response
+	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
 	 */
 	public function download(Request $request, File $file)
 	{

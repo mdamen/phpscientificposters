@@ -12,7 +12,7 @@ interface PosterRepositoryInterface
 	public function countPosters();
     
     /**
-     * @return @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getPosters();
     
