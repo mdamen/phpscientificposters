@@ -98,10 +98,8 @@ class FileController extends Controller
 	 * @return Response
 	 */
 	public function download(Request $request, File $file){
-		//PDF file is stored under project/public/download/info.pdf
-        $filePath = public_path(). "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
-		
-        return Response::download($filePath, $file->filename);
+		$filePath = public_path(). "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
+		return Response::download($filePath, $file->filename);
 	}
 }
 
