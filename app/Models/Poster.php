@@ -5,6 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $conference
+ * @property date $conference_at
+ * @property string $contact_email
+ * @property string $text
+ */
 class Poster extends Model
 {
     use SoftDeletes;

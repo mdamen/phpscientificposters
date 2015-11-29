@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property int $poster_id
+ * @property string $filename
+ * @property string $extension
+ */
 class File extends Model
 {
     use SoftDeletes;
