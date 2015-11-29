@@ -12,16 +12,16 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-		Schema::create('files', function (Blueprint $table) {
-			$table->increments('id');
-			$table->integer('poster_id')->unsigned();
-			$table->string('filename');
-			$table->string('extension');
-			
-			$table->timestamps();
-			$table->softDeletes();
-			
-			$table->foreign('poster_id')->references('id')->on('posters');
+        Schema::create('files', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('poster_id')->unsigned();
+            $table->string('filename');
+            $table->string('extension');
+            
+            $table->timestamps();
+            $table->softDeletes();
+            
+            $table->foreign('poster_id')->references('id')->on('posters');
         });
     }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePosterTable extends Migration
+class CreateAuthorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,15 @@ class CreatePosterTable extends Migration
      */
     public function up()
     {
-        Schema::create('posters', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('conference');
-            $table->date('conference_at');
-            $table->string('contact_email');
-            $table->text('abstract');
+            $table->integer('poster_id')->unsigned();
+            $table->string('name');
             
             $table->timestamps();
             $table->softDeletes();
+            
+            $table->foreign('poster_id')->references('id')->on('posters');
         });
     }
 
@@ -32,6 +31,6 @@ class CreatePosterTable extends Migration
      */
     public function down()
     {
-        Schema::drop('posters');
+        Schema::drop('authors');
     }
 }

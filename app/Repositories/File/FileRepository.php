@@ -6,14 +6,14 @@ use App\Models\File;
 
 class FileRepository implements FileRepositoryInterface
 {
-	/**
-	 * @param File $file
-	 *
-	 * @return void
-	 */
-	public function deleteFile(File $file) {
-		$file->delete();
-	}
+    /**
+     * @param File $file
+     *
+     * @return void
+     */
+    public function deleteFile(File $file) {
+        $file->delete();
+    }
 }
 
 ?>

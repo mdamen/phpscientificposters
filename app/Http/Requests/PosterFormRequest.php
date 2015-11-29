@@ -10,17 +10,17 @@ namespace App\Http\Requests;
 class PosterFormRequest extends Request
 {
     /**
-     * @return bool
-     */
+    * @return bool
+    */
     public function authorize()
     {
         // Only allow logged in users
         return true;
     }
-    
+
     /**
-     * @return array
-     */
+    * @return array
+    */
     public function rules()
     {
         return [
@@ -28,7 +28,7 @@ class PosterFormRequest extends Request
             'conference'    => 'required|min:1',
             'conference_at' => 'date',
             'contact_email' => 'email',
-			'abstract'		=> 'required|min:1',
+            'abstract'      => 'required|min:1',
         ];
     }
 }

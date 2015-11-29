@@ -8,20 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int $id
  * @property int $poster_id
- * @property string $filename
- * @property string $extension
+ * @property string $name
  * @property Poster $poster
  */
-class File extends Model
+class Author extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['filename', 'extension'];
-    protected $table = 'files';
+    protected $fillable = ['name'];
+    protected $table = 'authors';
     protected $dates = ['deleted_at'];
     
     /**
-     * Get the poster that owns the file.
+     * Get the poster that the author created.
      *
      * @return Poster
      */
