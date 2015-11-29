@@ -16,7 +16,7 @@ use Response;
  * @package App\Http\Controllers
  */
 class FileController extends Controller
-{	
+{
 	/**
 	 * @param Poster	$poster
 	 *
@@ -51,7 +51,7 @@ class FileController extends Controller
 		$file = array('file' => Input::file('file'));
 		
 		// setting up rules
-		$rules = array('file' => 'required',); //mimes:jpeg,bmp,png and for max size max:10000
+		$rules = array('file' => 'required|mimes:jpeg,bmp,png,pdf',);
 		
 		// doing the validation, passing post data, rules and the messages
 		$validator = Validator::make($file, $rules);
