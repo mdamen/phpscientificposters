@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Poster;
 use Illuminate\Routing\UrlGenerator;
-use App\Repositories\Poster\PosterRepositoryInterface;
-
+use App\Models\Poster;
 use App\Http\Requests\PosterFormRequest;
+use App\Repositories\Poster\PosterRepositoryInterface;
 
 /**
  * Class AccountController

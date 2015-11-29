@@ -17,7 +17,7 @@ use App\Models\File;
 // models
 Route::bind(
     'poster',
-    function ($value) {
+    function($value) {
         $object = Poster::find($value);
         
         if ($object) {
@@ -31,7 +31,7 @@ Route::bind(
 // models
 Route::bind(
     'file',
-    function ($value) {
+    function($value) {
         $object = File::find($value);
         
         if ($object) {

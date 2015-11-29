@@ -8,6 +8,8 @@ interface FileRepositoryInterface
 {
 	/**
 	 * @param File $file
+	 *
+	 * @return void
 	 */
 	public function deleteFile(File $file);
 }

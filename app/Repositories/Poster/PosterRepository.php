@@ -14,7 +14,7 @@ class PosterRepository implements PosterRepositoryInterface
 	}
 	
 	/**
-	 * @return Collection
+	 * @return \Illuminate\Database\Eloquent\Collection
 	 */
 	public function getPosters() {
 		return Poster::all();
@@ -52,6 +52,8 @@ class PosterRepository implements PosterRepositoryInterface
 	
 	/**
 	 * @param Poster $poster
+	 *
+	 * @return void
 	 */
 	public function deletePoster(Poster $poster) {
 		$poster->delete();

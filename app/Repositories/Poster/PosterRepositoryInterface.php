@@ -12,7 +12,7 @@ interface PosterRepositoryInterface
 	public function countPosters();
     
     /**
-     * @return Collection
+     * @return @return \Illuminate\Database\Eloquent\Collection
      */
     public function getPosters();
     
@@ -28,10 +28,12 @@ interface PosterRepositoryInterface
 	 *
 	 * @return Poster
 	 */
-	public function updatePoster(Poster $account);
+	public function updatePoster(Poster $poster);
 	
     /**
 	 * @param Poster $poster
+	 *
+	 * @return void
 	 */
 	public function deletePoster(Poster $poster);
 }

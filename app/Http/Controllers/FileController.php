@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Poster;
 use App\Models\File;
 use App\Repositories\File\FileRepositoryInterface;
-
 use Input;
 use Validator;
 use Redirect;
@@ -33,7 +32,7 @@ class FileController extends Controller
 	/**
 	 * @param File	$file
 	 *
-	 * @return \Illuminate\View\View
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function delete(FileRepositoryInterface $repository, File $file)
 	{
@@ -49,7 +48,8 @@ class FileController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function upload(Request $request, Poster $poster){
+	public function upload(Request $request, Poster $poster)
+	{
 		// getting all of the post data
 		$file = array('file' => Input::file('file'));
 		
@@ -60,10 +60,8 @@ class FileController extends Controller
 		$validator = Validator::make($file, $rules);
 		
 		if ($validator->fails()) {
-			// send back to the page with the input data and errors
-			return Redirect::to(route('poster.details', [$poster->id]))->withInput()->withErrors($validator);
-		}
-		else {
+			return Response::json('error', 400);
+		} else {
 			// checking file is valid.
 			if (Input::file('file')->isValid()) {
 				// get original filename
@@ -76,17 +74,12 @@ class FileController extends Controller
 				
 				// move uploaded file
 				$destinationPath = 'uploads/' . $poster->id; // upload path
-				$fileName = $file_obj->id.'.'.$originalExtension; // renameing image
+				$fileName = $file_obj->id . '.' . $originalExtension; // renameing image
 				Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
 				
-				// sending back with message
-				Session::flash('success', 'Upload successfully'); 
-				return Redirect::to(route('poster.details', [$poster->id]));
-			}
-			else {
-				// sending back with error message.
-				Session::flash('error', 'uploaded file is not valid');
-				return Redirect::to(route('poster.details', [$poster->id]));
+				return Response::json('success', 200);;
+			} else {
+				return Response::json('error', 400);
 			}
 		}
 	}
@@ -97,8 +90,9 @@ class FileController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function download(Request $request, File $file){
-		$filePath = public_path(). "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
+	public function download(Request $request, File $file)
+	{
+		$filePath = public_path() . "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
 		return Response::download($filePath, $file->filename);
 	}
 }
