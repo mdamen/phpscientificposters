@@ -41,12 +41,11 @@ class FileController extends Controller
 	}
 
 	/**
-	 * @param Request 	$request
 	 * @param Poster	$poster
 	 *
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	public function upload(Request $request, Poster $poster)
+	public function upload(Poster $poster)
 	{
 		// getting all of the post data
 		$file = array('file' => Input::file('file'));
@@ -83,12 +82,11 @@ class FileController extends Controller
 	}
 	
 	/**
-	 * @param Request 	$request
 	 * @param File		$file
 	 *
 	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
 	 */
-	public function download(Request $request, File $file)
+	public function download(File $file)
 	{
 		$filePath = public_path() . "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
 		return Response::download($filePath, $file->filename);
