@@ -68,6 +68,9 @@ class PosterController extends Controller
      */
     public function add(PosterFormRequest $request, PosterRepositoryInterface $repository)
     {        
+        // retrieve authors
+        $authors = array_filter($request->input('authors'));
+        
         // check if input is array
         if (!is_array($authors)) {
             throw new \RuntimeException('$authors must be an array.');
@@ -83,9 +86,6 @@ class PosterController extends Controller
         ];
         $poster = $repository->storePoster($posterdata);
         
-        // retrieve authors
-        $authors = array_filter($request->input('authors'));
-        
         // add authors
         $repository->addAuthorsByName($poster, $authors);
         
@@ -100,6 +100,9 @@ class PosterController extends Controller
      */
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
+        // temp variable to find which authors to still process after detaching
+        $authors_to_process = $request->input('authors');
+        
         // check if input is array
         if (!is_array($authors_to_process)) {
             throw new \RuntimeException('$authors_to_process must be an array.');
@@ -112,9 +115,6 @@ class PosterController extends Controller
         $poster->contact_email  = $request->input('contact_email');
         $poster->abstract       = $request->input('abstract');
         $repository->updatePoster($poster);
-        
-        // temp variable to find which authors to still process after detaching
-        $authors_to_process = $request->input('authors');
         
         // remove authors not present anymore in form
         foreach($poster->authors as $author) {
