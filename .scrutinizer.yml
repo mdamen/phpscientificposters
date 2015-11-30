@@ -2,9 +2,3 @@ checks:
     php:
         code_rating: true
         duplication: true
-        
-coding_style:
-    php:
-        indentation:
-            general:
-                use_tabs: true
