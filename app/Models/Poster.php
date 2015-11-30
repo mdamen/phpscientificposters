@@ -36,4 +36,31 @@ class Poster extends Model
     {
         return $this->hasMany('App\Models\Author');
     }
+    
+    /**
+     * @param int $max
+     *
+     * Returns a text representation of max $max authors
+     */
+    public function authorline($max)
+    {
+        // temp variable to store author names
+        $authornames = array();
+        
+        // find the authors to include
+        $authors_to_include = array_slice($this->authors->all(), 0, $max);
+        
+        // find the names of the included authors
+        foreach($authors_to_include as $author_to_include) {
+            $authornames[] = $author_to_include->name;
+        }
+        
+        // construct author line
+        $authorline = implode(", ", $authornames);
+        if($this->authors->count() > $max) {
+            $authorline .= " et al.";
+        }
+        
+        return $authorline;
+    }
 }

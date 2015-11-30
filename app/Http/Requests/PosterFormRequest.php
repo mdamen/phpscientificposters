@@ -2,7 +2,7 @@
 namespace App\Http\Requests;
 
 /**
- * Class AccountFormRequest
+ * Class PosterFormRequest
  *
  * @codeCoverageIgnore
  * @package App\Http\Requests
@@ -28,6 +28,7 @@ class PosterFormRequest extends Request
             'conference'    => 'required|min:1',
             'conference_at' => 'date',
             'contact_email' => 'email',
+            'authors'       => 'array',
             'abstract'      => 'required|min:1',
         ];
     }

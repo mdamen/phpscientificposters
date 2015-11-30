@@ -20,7 +20,6 @@
 				<th>Conference</th>
 				<th>Author(s)</th>
                 <th>Title</th>
-				
               </tr>
             </thead>
             <tbody>
@@ -28,7 +27,7 @@
               <tr>
 				<td>{{ $poster->conference_at }}</td>
 				<td>{{ $poster->conference }}</td>
-				<td></td>
+				<td>{{ $poster->authorline(2) }}</td>
                 <td><a href="{{ route('poster.details', [$poster->id]) }}">{{ $poster->title }}</a></td>
               </tr>
               @endforeach

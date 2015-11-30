@@ -15,6 +15,12 @@
 		<div class="col-sm-8">
 			<p>{{ $poster->conference }} ({{ $poster->conference_at }})</p>
 			<p><i class="fa fa-envelope"></i> {{ $poster->contact_email }}</p>
+            <p>
+				<strong>Authors:</strong><br />
+				@foreach ($poster->authors as $author)
+                {{ $author->name }}<br />
+                @endforeach
+			</p>
 			<p>
 				<strong>Abstract:</strong><br />
 				{{ $poster->abstract }}

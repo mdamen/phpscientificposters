@@ -3,6 +3,7 @@
 namespace App\Repositories\Poster;
 
 use App\Models\Poster;
+use App\Models\Author;
 
 interface PosterRepositoryInterface
 {
@@ -36,6 +37,22 @@ interface PosterRepositoryInterface
      * @return void
      */
     public function deletePoster(Poster $poster);
+    
+    /**
+     * @param Poster    $poster
+     * @param Author $author
+     *
+     * @return void
+     */
+    public function attachAuthor(Poster $poster, Author $author);
+    
+    /**
+     * @param Poster $poster
+     * @param Author $author
+     *
+     * @return void
+     */
+    public function detachAuthor(Poster $poster, Author $author);
 }
 
 

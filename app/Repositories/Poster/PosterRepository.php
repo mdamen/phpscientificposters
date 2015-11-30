@@ -3,6 +3,7 @@
 namespace App\Repositories\Poster;
 
 use App\Models\Poster;
+use App\Models\Author;
 
 class PosterRepository implements PosterRepositoryInterface
 {
@@ -34,8 +35,17 @@ class PosterRepository implements PosterRepositoryInterface
                 'contact_email' => $data['contact_email'],
                 'abstract'      => $data['abstract']
             ]
-        );
+        );        
         $poster->save();
+        
+        // attach authors
+        foreach($data['authors'] as $author) {
+            $authordata = [
+                'name' => $author
+            ];
+            
+            $this->attachAuthor($poster, $authordata);
+        }
         
         return $poster;
     }
@@ -58,6 +68,26 @@ class PosterRepository implements PosterRepositoryInterface
      */
     public function deletePoster(Poster $poster) {
         $poster->delete();
+    }
+    
+    /**
+     * @param Poster $poster
+     * @param Author $author
+     *
+     * @return void
+     */
+    public function attachAuthor(Poster $poster, Author $author) {
+        $poster->authors()->save($author);
+    }
+    
+    /**
+     * @param Poster $poster
+     * @param Author $author
+     *
+     * @return void
+     */
+    public function detachAuthor(Poster $poster, Author $author) {
+        $author->delete();
     }
 }
 

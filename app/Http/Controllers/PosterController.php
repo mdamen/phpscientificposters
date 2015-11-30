@@ -68,16 +68,24 @@ class PosterController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function add(PosterFormRequest $request, PosterRepositoryInterface $repository)
-    {
+    {        
         $posterdata = [
             'title'         => $request->input('title'),
             'conference'    => $request->input('conference'),
             'conference_at' => $request->input('conference_at'),
             'contact_email' => $request->input('contact_email'),
+            'authors'       => array_filter($request->input('authors')),
             'abstract'      => $request->input('abstract')
         ];
         
         $poster = $repository->storePoster($posterdata);
+        
+        // add authors
+        foreach(array_filter($request->input('authors')) as $authorname) {
+            $repository->attachAuthor($poster, new Author([
+                'name' => $authorname
+            ]));
+        }
         
         return redirect(route('poster.details', [$poster->id]));
     }
@@ -97,6 +105,25 @@ class PosterController extends Controller
         $poster->abstract       = $request->input('abstract');
         
         $repository->updatePoster($poster);
+        
+        // temp variable to find which authors to still process after detaching
+        $authors_to_process = $request->input('authors');
+        
+        // remove authors not present anymore in form
+        foreach($poster->authors as $author) {
+            if(!in_array($author->name, $request->input('authors'))) {
+                $repository->detachAuthor($poster, $author);
+            }
+            
+            $authors_to_process = array_diff($authors_to_process, [$author->name]);
+        }
+        
+        // add authors not present anymore in database
+        foreach($authors_to_process as $author_to_add) {
+            $repository->attachAuthor($poster, new Author([
+                'name' => $author_to_add
+            ]));
+        }
         
         return redirect(route('poster.details', [$poster->id]));
     }

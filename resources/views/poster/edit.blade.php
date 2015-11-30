@@ -12,9 +12,9 @@
 @stop
 
 @section('content')
-  <div class="col-md-6">
-		<div class="row">
-			<form action="{{ route('poster.update', [$poster->id]) }}" method="post">
+    <form action="{{ route('poster.update', [$poster->id]) }}" method="post">
+        <div class="row">
+            <div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">Poster details</h3>
@@ -50,11 +50,49 @@
 						<input type="submit" class="btn btn-sm btn-info btn-flat pull-right" id="sendEmail" value="Save" />
 					</div>
 				</div>
-			</form>
-		</div>
-	</div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Authors</h3>
+                    </div>
+                    <div class="box-body">
+                        <div id="dynamicInput">
+                            @foreach ($poster->authors as $author)
+                            <div class="form-group"><input type="text" class="form-control" name="authors[]" value="{{ $author->name }}"></div>
+                            @endforeach
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="box-footer clearfix">
+                                <input type="button" value="Add another author" onClick="addInput('dynamicInput');" class="btn btn-sm btn-info btn-flat pull-right" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <script>
+    var counter = {{ $poster->authors->count() }};
+    var limit = 10;
+
+    function addInput(divName){
+        if (counter == limit)  {
+            alert("You have reached the limit of adding " + counter + " authors");
+        } else {
+            var newdiv = document.createElement('div');
+            newdiv.innerHTML = "<div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"authors[]\" placeholder=\"Author " + (counter+1) + "\"></div>";
+            document.getElementById(divName).appendChild(newdiv);
+            counter++;
+        }
+    }
+    </script>
 
 	<script language="text/javascript">
-		jQuery('.datepicker').datepicker();
+		jQuery('.datepicker').datepicker({
+		  dateFormat: "yy-mm-dd"
+		});
 	</script>
 @stop
