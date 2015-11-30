@@ -68,6 +68,12 @@ class PosterController extends Controller
      */
     public function add(PosterFormRequest $request, PosterRepositoryInterface $repository)
     {        
+        // check if input is array
+        if (!is_array($authors)) {
+            throw new \RuntimeException('$authors must be an array.');
+        }
+        
+        // set poster properties and save
         $posterdata = [
             'title'         => $request->input('title'),
             'conference'    => $request->input('conference'),
@@ -75,19 +81,13 @@ class PosterController extends Controller
             'contact_email' => $request->input('contact_email'),
             'abstract'      => $request->input('abstract')
         ];
-        
         $poster = $repository->storePoster($posterdata);
         
         // retrieve authors
         $authors = array_filter($request->input('authors'));
         
-        // check if input is array
-        if (!is_array($authors)) {
-            throw new \RuntimeException('$authors must be an array.');
-        }
-        
         // add authors
-        $repository->addAuthorsByName($authors);
+        $repository->addAuthorsByName($poster, $authors);
         
         return redirect(route('poster.details', [$poster->id]));
     }
@@ -100,21 +100,21 @@ class PosterController extends Controller
      */
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
+        // check if input is array
+        if (!is_array($authors_to_process)) {
+            throw new \RuntimeException('$authors_to_process must be an array.');
+        }
+        
+        // set poster properties and update
         $poster->title          = $request->input('title');
         $poster->conference     = $request->input('conference');
         $poster->conference_at  = $request->input('conference_at');
         $poster->contact_email  = $request->input('contact_email');
         $poster->abstract       = $request->input('abstract');
-        
         $repository->updatePoster($poster);
         
         // temp variable to find which authors to still process after detaching
         $authors_to_process = $request->input('authors');
-        
-        // check if input is array
-        if (!is_array($authors_to_process)) {
-            throw new \RuntimeException('$authors_to_process must be an array.');
-        }
         
         // remove authors not present anymore in form
         foreach($poster->authors as $author) {
@@ -126,7 +126,7 @@ class PosterController extends Controller
         }
         
         // add authors not present anymore in database
-        $repository->addAuthorsByName($authors_to_process);
+        $repository->addAuthorsByName($poster, $authors_to_process);
         
         return redirect(route('poster.details', [$poster->id]));
     }

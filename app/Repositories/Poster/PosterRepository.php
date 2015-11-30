@@ -62,11 +62,12 @@ class PosterRepository implements PosterRepositoryInterface
     }
     
     /**
-     * param array $authornames
+     * @param Poster $poster
+     * @param array  $authornames
      *
      * @return void
      */
-    function addAuthorsByName(array $authornames) {
+    public function addAuthorsByName(Poster $poster, array $authornames) {
         foreach($authornames as $authorname) {
             $this->attachAuthor($poster, new Author([
                 'name' => $authorname
