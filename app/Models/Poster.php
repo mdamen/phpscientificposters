@@ -11,7 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $conference
  * @property date $conference_at
  * @property string $contact_email
- * @property string $text
+ * @property string $abstract
+ * @property Collection $authors
+ * @property Collection $files
  */
 class Poster extends Model
 {

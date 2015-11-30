@@ -38,15 +38,6 @@ class PosterRepository implements PosterRepositoryInterface
         );        
         $poster->save();
         
-        // attach authors
-        foreach($data['authors'] as $author) {
-            $authordata = [
-                'name' => $author
-            ];
-            
-            $this->attachAuthor($poster, $authordata);
-        }
-        
         return $poster;
     }
     

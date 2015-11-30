@@ -14,7 +14,7 @@ use App\Repositories\Poster\PosterRepositoryInterface;
  * @package App\Http\Controllers
  */
 class PosterController extends Controller
-{   
+{
     /**
      * @param PosterRepositoryInterface $repository
      *
@@ -28,12 +28,12 @@ class PosterController extends Controller
     }
     
     /**
-     * @param PosterRepositoryInterface $repository
-     * @param Poster                    $poster
+     * @param UrlGenerator $urlgenerator
+     * @param Poster       $poster
      *
      * @return \Illuminate\View\View
      */
-    public function details(PosterRepositoryInterface $repository, UrlGenerator $urlgenerator, Poster $poster)
+    public function details(UrlGenerator $urlgenerator, Poster $poster)
     {
         $url = $urlgenerator->full();
         
@@ -51,12 +51,11 @@ class PosterController extends Controller
     }
     
     /**
-     * @param PosterRepositoryInterface $repository
-     * @param Poster                    $poster
+     * @param Poster $poster
      *
      * @return \Illuminate\View\View
      */
-    public function edit(PosterRepositoryInterface $repository, Poster $poster)
+    public function edit(Poster $poster)
     {
         return view('poster.edit', compact('poster'));
     }
@@ -74,14 +73,21 @@ class PosterController extends Controller
             'conference'    => $request->input('conference'),
             'conference_at' => $request->input('conference_at'),
             'contact_email' => $request->input('contact_email'),
-            'authors'       => array_filter($request->input('authors')),
             'abstract'      => $request->input('abstract')
         ];
         
         $poster = $repository->storePoster($posterdata);
         
+        // retrieve authors
+        $authors = array_filter($request->input('authors'));
+        
+        // check if input is array
+        if (!is_array($authors)) {
+            throw new \RuntimeException('$authors must be an array.');
+        }
+        
         // add authors
-        foreach(array_filter($request->input('authors')) as $authorname) {
+        foreach($authors as $authorname) {
             $repository->attachAuthor($poster, new Author([
                 'name' => $authorname
             ]));
@@ -108,6 +114,11 @@ class PosterController extends Controller
         
         // temp variable to find which authors to still process after detaching
         $authors_to_process = $request->input('authors');
+        
+        // check if input is array
+        if (!is_array($authors_to_process)) {
+            throw new \RuntimeException('$authors_to_process must be an array.');
+        }
         
         // remove authors not present anymore in form
         foreach($poster->authors as $author) {
