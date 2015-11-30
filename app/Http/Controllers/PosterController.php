@@ -87,11 +87,7 @@ class PosterController extends Controller
         }
         
         // add authors
-        foreach($authors as $authorname) {
-            $repository->attachAuthor($poster, new Author([
-                'name' => $authorname
-            ]));
-        }
+        $repository->addAuthorsByName($authors);
         
         return redirect(route('poster.details', [$poster->id]));
     }
@@ -130,11 +126,7 @@ class PosterController extends Controller
         }
         
         // add authors not present anymore in database
-        foreach($authors_to_process as $author_to_add) {
-            $repository->attachAuthor($poster, new Author([
-                'name' => $author_to_add
-            ]));
-        }
+        $repository->addAuthorsByName($authors_to_process);
         
         return redirect(route('poster.details', [$poster->id]));
     }
