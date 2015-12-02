@@ -23,7 +23,7 @@
 					</div>
 				</form>
 			</p>
-			<p><a href="{{ route('poster.details', [$poster->id]) }}" class="btn btn-sm btn-info btn-flat">Done</a></p>
+			<p><a href="{{ route('poster.details', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Done</a></p>
 		</div>
 	</div>
 @stop

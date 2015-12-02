@@ -54,3 +54,7 @@ Route::get('file/add/{poster}', array('as' => 'file.add', 'uses' => 'FileControl
 Route::get('file/delete/{file}', array('as' => 'file.delete', 'uses' => 'FileController@delete'));
 Route::post('file/upload/{poster}', array('as' => 'file.upload', 'uses' => 'FileController@upload'));
 Route::get('file/download/{file}', array('as' => 'file.download', 'uses' => 'FileController@download'));
+
+Route::get('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin'));
+Route::get('auth/logout', array('as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout'));

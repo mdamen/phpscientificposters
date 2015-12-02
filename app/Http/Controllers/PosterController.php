@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Models\Poster;
 use App\Http\Requests\PosterFormRequest;
@@ -16,13 +17,21 @@ use App\Repositories\Poster\PosterRepositoryInterface;
 class PosterController extends Controller
 {
     /**
+     * Constructor to setup the authentication for this controller
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'details']]);
+    }
+    
+    /**
      * @param PosterRepositoryInterface $repository
      *
      * @return \Illuminate\View\View
      */
     public function index(PosterRepositoryInterface $repository)
     {
-        $posters = $repository->getPosters();
+        $posters = $repository->getPosters(15);
         
         return view('poster.list', compact('posters'));
     }
@@ -51,13 +60,24 @@ class PosterController extends Controller
     }
     
     /**
-     * @param Poster $poster
+     * @param Request $request
+     * @param Poster  $poster
      *
      * @return \Illuminate\View\View
      */
-    public function edit(Poster $poster)
+    public function edit(Request $request, Poster $poster)
     {
-        return view('poster.edit', compact('poster'));
+        if (!empty($request->old('authors'))) {
+            $authors = old('authors');
+        } else {
+            $authors = array();
+            
+            foreach($poster->authors as $author) {
+                $authors[] = $author->name;
+            }
+        }
+        
+        return view('poster.edit', compact('poster', 'authors'));
     }
     
     /**
@@ -67,7 +87,7 @@ class PosterController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function add(PosterFormRequest $request, PosterRepositoryInterface $repository)
-    {        
+    {
         // retrieve authors
         $authors = array_filter($request->input('authors'));
         
@@ -89,6 +109,9 @@ class PosterController extends Controller
         // add authors
         $repository->addAuthorsByName($poster, $authors);
         
+        // flash message to session
+        $request->session()->flash('success', 'Poster successfully added');
+        
         return redirect(route('poster.details', [$poster->id]));
     }
     
@@ -101,7 +124,7 @@ class PosterController extends Controller
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
         // temp variable to find which authors to still process after detaching
-        $authors_to_process = $request->input('authors');
+        $authors_to_process = array_filter($request->input('authors'));
         
         // check if input is array
         if (!is_array($authors_to_process)) {
@@ -128,18 +151,26 @@ class PosterController extends Controller
         // add authors not present anymore in database
         $repository->addAuthorsByName($poster, $authors_to_process);
         
+        // flash message to session
+        $request->session()->flash('success', 'Poster successfully updated');
+        
         return redirect(route('poster.details', [$poster->id]));
     }
 
     /**
+     * @param \Illuminate\Http\Request  $request
      * @param PosterRepositoryInterface $repository
      * @param Poster                    $poster
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(PosterRepositoryInterface $repository, Poster $poster)
+    public function delete(Request $request, PosterRepositoryInterface $repository, Poster $poster)
     {
+        // delete poster
         $repository->deletePoster($poster);
+        
+        // flash message to session
+        $request->session()->flash('error', 'Poster removed');
         
         return redirect(route('poster.list'));
     }

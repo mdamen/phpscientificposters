@@ -2,26 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use Auth;
+use App\Models\User;
 use Validator;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins;
 
     /**
      * Create a new authentication controller instance.
@@ -32,34 +22,54 @@ class AuthController extends Controller
     {
         $this->middleware('guest', ['except' => 'getLogout']);
     }
-
+    
     /**
-     * Get a validator for an incoming registration request.
+     * Log the user in with the credentials send in the POST request
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param \Illuminate\Http\Request $request
+     *
+     * return \Illuminate\Http\RedirectResponse
      */
-    protected function validator(array $data)
+    public function postLogin(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+        $this->validate($request, [
+            'username' => 'required', 'password' => 'required',
         ]);
+
+        $credentials = $request->only('username', 'password');
+
+        // check if login is succesfull
+        if (Auth::attempt($credentials, $request->has('remember')))
+        {
+            // flash message to session
+            $request->session()->flash('info', 'You have been logged in');
+        
+            #return redirect(route('poster.list'));
+            return back();
+        }
+        
+        // show error message through flash message
+        $request->session()->flash('error', 'These credentials do not match an existing account');
+        
+        return redirect()->back()
+            ->withInput($request->only('username', 'remember'));
     }
-
+    
     /**
-     * Create a new user instance after a valid registration.
+     * Logout current user
      *
-     * @param  array  $data
-     * @return User
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    protected function create(array $data)
+    public function getLogout(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        // logout user
+        Auth::logout();
+        
+        // flash message to session
+        $request->session()->flash('info', 'You have been logged out');
+        
+        return redirect()->back();
     }
 }

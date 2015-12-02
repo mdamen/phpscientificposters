@@ -7,7 +7,7 @@ use App\Models\File;
 use App\Repositories\File\FileRepositoryInterface;
 use Input;
 use Validator;
-use Request;
+use Illuminate\Http\Request;
 use Response;
 
 /**
@@ -17,6 +17,25 @@ use Response;
  */
 class FileController extends Controller
 {
+    /**
+     * Constructor to setup the authentication for this controller
+     */
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['download']]);
+    }
+    
+    /**
+     * @param File      $file
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function download(File $file)
+    {
+        $filePath = public_path() . "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
+        return Response::download($filePath, $file->filename);
+    }
+    
     /**
      * @param Poster    $poster
      *
@@ -32,10 +51,13 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(FileRepositoryInterface $repository, File $file)
+    public function delete(Request $request, FileRepositoryInterface $repository, File $file)
     {
         $posterid = $file->poster->id;
         $repository->deleteFile($file);
+        
+        // flash message to session
+        $request->session()->flash('error', 'File deleted');
         
         return redirect(route('poster.details', [$posterid]));
     }
@@ -79,16 +101,5 @@ class FileController extends Controller
                 return Response::json('error', 400);
             }
         }
-    }
-    
-    /**
-     * @param File      $file
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    public function download(File $file)
-    {
-        $filePath = public_path() . "/uploads/" . $file->poster->id . "/" . $file->id . "." . $file->extension;
-        return Response::download($filePath, $file->filename);
     }
 }

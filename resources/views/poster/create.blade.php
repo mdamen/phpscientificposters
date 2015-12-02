@@ -11,7 +11,25 @@
 @stop
 
 @section('content')
-    <form action="{{ route('poster.add') }}" method="post">
+    {!! Form::open([
+        'method' => 'POST', 
+        'route' => 'poster.add'
+    ]) !!}
+        @if(count($errors)>0)
+        <div class="row">
+            <div class="col-md-12">
+                <!-- if there are login errors, show them here -->
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endif
+        
         <div class="row">
             <div class="col-md-6">
                 <div class="box">
@@ -19,36 +37,36 @@
                         <h3 class="box-title">Poster details</h3>
                     </div>
                     <div class="box-body">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                        {!! Form::token() !!}
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Title">
+                            {!! Form::text('title', Input::old('title'), ['class' => 'form-control', 'placeholder' => 'Title']) !!}
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control" name="conference" placeholder="Conference">
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="text" class="form-control" data-provide="datepicker" placeholder="Conference date" name="conference_at" data-date-format="yyyy-mm-dd">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                            </div><!-- /.input group -->
-                        </div><!-- /.form group -->
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">@</span>
-                                <input type="text" class="form-control" placeholder="Email address 1st author" aria-describedby="basic-addon1" name="contact_email">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="comment">Abstract:</label>
-                            <textarea class="form-control" rows="5" name="abstract"></textarea>
-                        </div>
+                            {!! Form::text('conference', Input::old('conference'), ['class' => 'form-control', 'placeholder' => 'Conference']) !!}
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+                                {!! Form::text('conference_at', Input::old('conference_at'), ['class' => 'form-control', 'placeholder' => 'Conference date', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd']) !!}
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+							</div><!-- /.input group -->
+						</div><!-- /.form group -->
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">@</span>
+                                {!! Form::text('contact_email', Input::old('contact_email'), ['class' => 'form-control', 'placeholder' => 'Email address 1st author']) !!}
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="comment">Abstract:</label>
+                            {!! Form::textarea('abstract', Input::old('abstract'), ['class' => 'form-control', 'rows' => '5']) !!}
+						</div>
                     </div>
                     <div class="box-footer clearfix">
-                        <input type="submit" class="btn btn-sm btn-info btn-flat pull-right" id="sendEmail" value="Add" />
+                        {!! Form::submit('Add', ['class' => 'btn btn-sm btn-primary btn-flat pull-right']) !!}
                     </div>
                 </div>
             </div>
@@ -66,7 +84,7 @@
                         
                         <div class="form-group">
                             <div class="box-footer clearfix">
-                                <input type="button" value="Add another author" onClick="addInput('dynamicInput');" class="btn btn-sm btn-info btn-flat pull-right" >
+                                <input type="button" value="Add another author" onClick="addInput('dynamicInput');" class="btn btn-sm btn-primary btn-flat pull-right" >
                             </div>
                         </div>
                     </div>
@@ -75,20 +93,20 @@
         </div>
     </form>
     
-    <script>
-    var counter = 3;
-    var limit = 10;
+    <script language="text/javascript">
+        var counter = 3;
+        var limit = 10;
 
-    function addInput(divName){
-        if (counter == limit)  {
-            alert("You have reached the limit of adding " + counter + " authors");
-        } else {
-            var newdiv = document.createElement('div');
-            newdiv.innerHTML = "<div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"authors[]\" placeholder=\"Author " + (counter+1) + "\"></div>";
-            document.getElementById(divName).appendChild(newdiv);
-            counter++;
+        function addInput(divName){
+            if (counter == limit)  {
+                alert("You have reached the limit of adding " + counter + " authors");
+            } else {
+                var newdiv = document.createElement('div');
+                newdiv.innerHTML = "<div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"authors[]\" placeholder=\"Author " + (counter+1) + "\"></div>";
+                document.getElementById(divName).appendChild(newdiv);
+                counter++;
+            }
         }
-    }
     </script>
 
 	<script language="text/javascript">

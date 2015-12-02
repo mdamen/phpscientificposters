@@ -17,8 +17,11 @@ class PosterRepository implements PosterRepositoryInterface
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getPosters() {
-        return Poster::all();
+    public function getPosters($max = 0) {
+        if (empty($max))
+            return Poster::all();
+        else
+            return Poster::paginate($max);
     }
     
     /**
