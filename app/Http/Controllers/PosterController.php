@@ -124,7 +124,7 @@ class PosterController extends Controller
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
         // check if input is array
-        if (!is_array($authors_to_process)) {
+        if (!is_array($request->input('authors'))) {
             throw new \RuntimeException('$authors_to_process must be an array.');
         }
         
