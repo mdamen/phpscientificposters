@@ -19,14 +19,14 @@ Breadcrumbs::register('poster.create', function($breadcrumbs)
 Breadcrumbs::register('poster.details', function($breadcrumbs, Poster $poster)
 {
     $breadcrumbs->parent('poster.list');
-    $breadcrumbs->push($poster->title, route('poster.details', $poster->id));
+    $breadcrumbs->push($poster->title, route('poster.details', [$poster->id]));
 });
 
 // Posters > [Poster] > Edit
 Breadcrumbs::register('poster.edit', function($breadcrumbs, Poster $poster)
 {
     $breadcrumbs->parent('poster.details', $poster);
-    $breadcrumbs->push("Edit", route('poster.edit', $poster->id));
+    $breadcrumbs->push("Edit", route('poster.edit', [$poster->id]));
 });
 
 
@@ -34,5 +34,5 @@ Breadcrumbs::register('poster.edit', function($breadcrumbs, Poster $poster)
 Breadcrumbs::register('file.add', function($breadcrumbs, Poster $poster)
 {
     $breadcrumbs->parent('poster.details', $poster);
-    $breadcrumbs->push('Add file', route('file.add', $poster->id));
+    $breadcrumbs->push('Add file', route('file.add', [$poster->id]));
 });

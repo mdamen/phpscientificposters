@@ -15,8 +15,6 @@ class AuthController extends Controller
 
     /**
      * Create a new authentication controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -44,7 +42,6 @@ class AuthController extends Controller
             // flash message to session
             $request->session()->flash('info', 'You have been logged in');
         
-            #return redirect(route('poster.list'));
             return back();
         }
         

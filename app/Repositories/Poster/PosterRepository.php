@@ -15,6 +15,8 @@ class PosterRepository implements PosterRepositoryInterface
     }
     
     /**
+     * @param int $max
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getPosters($max = 0) {

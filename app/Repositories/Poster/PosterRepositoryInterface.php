@@ -13,9 +13,11 @@ interface PosterRepositoryInterface
     public function countPosters();
     
     /**
+     * @param int $max
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getPosters();
+    public function getPosters($max = 0);
     
     /**
      * @param array $data
