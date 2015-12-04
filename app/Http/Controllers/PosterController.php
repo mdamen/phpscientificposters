@@ -123,9 +123,6 @@ class PosterController extends Controller
      */
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
-        // temp variable to find which authors to still process after detaching
-        $authors_to_process = array_filter($request->input('authors'));
-        
         // check if input is array
         if (!is_array($authors_to_process)) {
             throw new \RuntimeException('$authors_to_process must be an array.');
@@ -139,14 +136,8 @@ class PosterController extends Controller
         $poster->abstract       = $request->input('abstract');
         $repository->updatePoster($poster);
         
-        // remove authors not present anymore in form
-        foreach($poster->authors as $author) {
-            if(!in_array($author->name, $request->input('authors'))) {
-                $repository->detachAuthor($poster, $author);
-            }
-            
-            $authors_to_process = array_diff($authors_to_process, [$author->name]);
-        }
+        // remove authors not present in database
+        $authors_to_process = $repository->removeAuthorsByName($poster, array_filter($request->input('authors')));
         
         // add authors not present anymore in database
         $repository->addAuthorsByName($poster, $authors_to_process);

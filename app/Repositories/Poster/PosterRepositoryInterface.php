@@ -49,6 +49,14 @@ interface PosterRepositoryInterface
     public function addAuthorsByName(Poster $poster, array $authornames);
     
     /**
+     * @param Poster $poster
+     * @param array  $authornames
+     *
+     * @return array
+     */
+    public function removeAuthorsByName(Poster $poster, array $authornames);
+    
+    /**
      * @param Poster    $poster
      * @param Author $author
      *

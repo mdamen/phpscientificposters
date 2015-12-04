@@ -82,6 +82,27 @@ class PosterRepository implements PosterRepositoryInterface
     
     /**
      * @param Poster $poster
+     * @param array  $authornames
+     *
+     * @return array
+     */
+    public function removeAuthorsByName(Poster $poster, array $authornames) {
+        $authors_to_process = $authornames;
+        
+        // remove authors not present anymore in form
+        foreach($poster->authors as $author) {
+            if(!in_array($author->name, $authornames)) {
+                $this->detachAuthor($poster, $author);
+            }
+            
+            $authors_to_process = array_diff($authors_to_process, [$author->name]);
+        }
+        
+        return $authors_to_process;
+    }
+    
+    /**
+     * @param Poster $poster
      * @param Author $author
      *
      * @return void
