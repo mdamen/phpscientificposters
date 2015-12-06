@@ -20,6 +20,8 @@
         <link rel="stylesheet" href="{{ asset('plugins/dropzone/dropzone.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/dropzone/style.css') }}">
         
+        <link rel="stylesheet" href="{{ asset('templates/tue/tue.css') }}">
+        
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
         <!-- Dropzone.js -->
@@ -39,47 +41,60 @@
         <![endif]-->
     </head>
     <body>
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="{{ route('poster.list') }}">
+                            <img src="{{ asset('templates/tue/img/tue_logo.png') }}" />
+                        </a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="pull-right">
+                            @if (Auth::check())
+                            <a href="{{ route('auth.logout') }}" class="btn btn-primary">Logout</a>
+                            @else
+                                {!! Form::open([
+                                    'method' => 'POST', 
+                                    'route' => 'auth.login'
+                                ]) !!}
+                                    {!! Form::token() !!}
+                                    
+                                    <div class="form-group">
+                                        {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => 'Username']) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+                                    </div>
+                                    
+                                    {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
+                                </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <nav class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ route('poster.list') }}">TU/e posters</a>
+                    </button>-->
+                    
+                    <a class="navbar-brand" href="{{ route('poster.list') }}">Plasma & Materials Processing</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    @if (Auth::check())
-                        <div class="navbar-form navbar-right">
-                        <a href="{{ route('auth.logout') }}" class="btn btn-primary">Logout</a>
-                        </div>
-                    @else
-                        {!! Form::open([
-                            'method' => 'POST', 
-                            'route' => 'auth.login',
-                            'class' => 'navbar-form navbar-right'
-                        ]) !!}
-                            {!! Form::token() !!}
-                            
-                            <div class="form-group">
-                                {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => 'Username']) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
-                            </div>
-                            
-                            {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
-                        </form>
-                    @endif
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
         <div class="container">
             <section class="content-header">
-                @yield('header')
                 @yield('breadcrumbs')
+                @yield('header')
             </section>
             <section class="content">
                 <div class="row">

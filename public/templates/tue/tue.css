@@ -1,0 +1,87 @@
+.header {
+    padding: 10px 0px;
+}
+
+.header .form-group {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+
+.navbar {
+    background-color: #D60270;
+}
+
+.btn-primary,
+.btn-primary:hover {
+    background-color: #0067B3;
+    border: none;
+}
+
+.btn-danger,
+.btn-danger:hover {
+    background-color: #D6004A;
+}
+
+.navbar, 
+.btn,
+.form-control,
+.breadcrumb,
+.input-group-addon,
+.alert,
+.pagination li a,
+.pagination li span {
+    border-radius: 0px !important;   
+}
+
+.navbar, 
+.btn,
+.form-control,
+.breadcrumb {
+    border: none;
+}
+
+.form-control,
+.input-group-addon {
+    border: 1px solid #ddd;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
+
+a.navbar-brand {
+    color: white !important;
+}
+
+ol.breadcrumb {
+    padding: 0px 0px 10px 0px;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+ol.breadcrumb li,
+ol.breadcrumb li a {
+    color: black !important;
+}
+
+ol.breadcrumb li:before {
+    font-weight: bold !important;
+}
+
+ol.breadcrumb li.active {
+    font-weight: normal;
+    color: #767676 !important;
+}
