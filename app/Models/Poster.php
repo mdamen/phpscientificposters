@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $contact_email
  * @property string $abstract
  * @property Collection $authors
- * @property Collection $files
+ * @property Collection $attachments
  */
 class Poster extends Model
 {
@@ -24,11 +24,11 @@ class Poster extends Model
     protected $dates = ['deleted_at'];
     
     /**
-     * Get the files for the poster.
+     * Get the attachments for the poster.
      */
-    public function files()
+    public function attachments()
     {
-        return $this->hasMany('App\Models\File');
+        return $this->hasMany('App\Models\Attachment');
     }
     
     /**

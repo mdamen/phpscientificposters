@@ -12,7 +12,7 @@
 */
 
 use App\Models\Poster;
-use App\Models\File;
+use App\Models\Attachment;
 
 // models
 Route::bind(
@@ -30,9 +30,9 @@ Route::bind(
 
 // models
 Route::bind(
-    'file',
+    'attachment',
     function($value) {
-        $object = File::find($value);
+        $object = Attachment::find($value);
         
         if ($object) {
             return $object;
@@ -50,10 +50,10 @@ Route::get('poster/edit/{poster}', array('as' => 'poster.edit', 'uses' => 'Poste
 Route::post('poster/update/{poster}', array('as' => 'poster.update', 'uses' => 'PosterController@update', 'middleware' => ['permission:edit-poster']));
 Route::get('poster/delete/{poster}', array('as' => 'poster.delete', 'uses' => 'PosterController@delete', 'middleware' => ['permission:delete-poster']));
 
-Route::get('file/add/{poster}', array('as' => 'file.add', 'uses' => 'FileController@add', 'middleware' => ['permission:upload-file']));
-Route::get('file/delete/{file}', array('as' => 'file.delete', 'uses' => 'FileController@delete', 'middleware' => ['permission:upload-file']));
-Route::post('file/upload/{poster}', array('as' => 'file.upload', 'uses' => 'FileController@upload', 'middleware' => ['permission:delete-file']));
-Route::get('file/download/{file}', array('as' => 'file.download', 'uses' => 'FileController@download'));
+Route::get('attachment/add/{poster}', array('as' => 'attachment.add', 'uses' => 'AttachmentController@add', 'middleware' => ['permission:upload-attachment']));
+Route::get('attachment/delete/{attachment}', array('as' => 'attachment.delete', 'uses' => 'AttachmentController@delete', 'middleware' => ['permission:upload-attachment']));
+Route::post('attachment/upload/{poster}', array('as' => 'attachment.upload', 'uses' => 'AttachmentController@upload', 'middleware' => ['permission:delete-attachment']));
+Route::get('attachment/download/{attachment}', array('as' => 'attachment.download', 'uses' => 'AttachmentController@download'));
 
 Route::post('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin'));
 Route::get('auth/logout', array('as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout'));

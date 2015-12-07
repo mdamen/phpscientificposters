@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $mime
  * @property Poster $poster
  */
-class File extends Model
+class Attachment extends Model
 {
     use SoftDeletes;
     

@@ -30,9 +30,9 @@ Breadcrumbs::register('poster.edit', function($breadcrumbs, Poster $poster)
 });
 
 
-// Posters > [poster] > Add file
-Breadcrumbs::register('file.add', function($breadcrumbs, Poster $poster)
+// Posters > [poster] > Add attachment
+Breadcrumbs::register('attachment.add', function($breadcrumbs, Poster $poster)
 {
     $breadcrumbs->parent('poster.details', $poster);
-    $breadcrumbs->push('Add file', route('file.add', [$poster->id]));
+    $breadcrumbs->push('Add attachment', route('attachment.add', [$poster->id]));
 });

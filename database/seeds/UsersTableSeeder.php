@@ -47,13 +47,13 @@ class UsersTableSeeder extends Seeder
         $deletePoster->name = 'delete-poster';
         $deletePoster->save();
         
-        $uploadFile = new Permission();
-        $uploadFile->name = 'upload-file';
-        $uploadFile->save();
+        $uploadAttachment = new Permission();
+        $uploadAttachment->name = 'upload-attachment';
+        $uploadAttachment->save();
         
-        $deleteFile = new Permission();
-        $deleteFile->name = 'delete-file';
-        $deleteFile->save();
+        $deleteAttachment = new Permission();
+        $deleteAttachment->name = 'delete-attachment';
+        $deleteAttachment->save();
         
         
         $createUser = new Permission();
@@ -70,7 +70,7 @@ class UsersTableSeeder extends Seeder
         
 
         $admin->attachPermissions(array($createUser, $editUser, $deleteUser));
-        $editor->attachPermissions(array($createPoster, $editPoster, $deletePoster, $uploadFile, $deleteFile));
+        $editor->attachPermissions(array($createPoster, $editPoster, $deletePoster, $uploadAttachment, $deleteAttachment));
         
         $user->attachRole($admin);
         $user->attachRole($editor);

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Poster;
-use App\Models\File;
-use App\Repositories\File\FileRepositoryInterface;
+use App\Models\Attachment;
+use App\Repositories\Attachment\AttachmentRepositoryInterface;
 
 use Input;
 use Validator;
@@ -15,23 +15,23 @@ use Illuminate\Support\Facades\Storage;
 
 
 /**
- * Class FileController
+ * Class AttachmentController
  *
  * @package App\Http\Controllers
  */
-class FileController extends Controller
+class AttachmentController extends Controller
 {
     /**
-     * @param File      $file
+     * @param Attachment $attachment
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function download(File $file)
+    public function download(Attachment $attachment)
     {
         $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-        $filePath = $storagePath . 'uploads/' . $file->poster->id . '/' . $file->id . '.' . $file->extension;
+        $attachmentPath = $storagePath . 'uploads/' . $attachment->poster->id . '/' . $attachment->id . '.' . $attachment->extension;
         
-        return response()->download($filePath, $file->filename);
+        return response()->download($attachmentPath, $attachment->filename);
     }
     
     /**
@@ -41,23 +41,23 @@ class FileController extends Controller
      */
     public function add(Poster $poster)
     {
-        return view('file.add', compact('poster'));
+        return view('attachment.add', compact('poster'));
     }
     
     /**
-     * @param Request                   $request
-     * @param FileRepositoryInterface   $repository
-     * @param File                      $file
+     * @param Request                       $request
+     * @param AttachmentRepositoryInterface $repository
+     * @param Attachment                    $attachment
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete(Request $request, FileRepositoryInterface $repository, File $file)
+    public function delete(Request $request, AttachmentRepositoryInterface $repository, Attachment $attachment)
     {
-        $posterid = $file->poster->id;
-        $repository->deleteFile($file);
+        $posterid = $attachment->poster->id;
+        $repository->deleteAttachment($attachment);
         
         // flash message to session
-        $request->session()->flash('error', 'File deleted');
+        $request->session()->flash('error', 'Attachment deleted');
         
         return redirect(route('poster.details', [$posterid]));
     }
@@ -93,15 +93,15 @@ class FileController extends Controller
                 $originalMime       = $file->getClientMimeType();
                 
                 // create new file object and save
-                $file_obj = new File([
+                $attachment = new Attachment([
                     'filename' => $originalFilename, 
                     'extension' => $originalExtension, 
                     'mime' => $originalMime
                 ]);
-                $poster->files()->save($file_obj);
+                $poster->attachments()->save($attachment);
                 
                 // move uploaded file
-                $destination = 'uploads/' . $poster->id . '/' . $file_obj->id . '.' . $originalExtension;
+                $destination = 'uploads/' . $poster->id . '/' . $attachment->id . '.' . $originalExtension;
                 Storage::disk('local')->put($destination,  \Illuminate\Support\Facades\File::get($file));
                 
                 return response()->json('success', 201);

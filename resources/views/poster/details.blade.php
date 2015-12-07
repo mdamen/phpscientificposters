@@ -26,7 +26,7 @@
 				<span id="abstract">{{ $poster->abstract }}</span>
 			</p>
 			<p>
-                @if(count($poster->files)>0) 
+                @if(count($poster->attachments)>0) 
 				<table id="mytable" class="table table-bordred table-striped">
 					<thead>
 						<th>Filename</th>
@@ -35,11 +35,11 @@
                         @endif
 					</thead>
 					<tbody>
-						@foreach ($poster->files as $file)
+						@foreach ($poster->attachments as $attachment)
 						<tr>
-							<td><a href="{{ route('file.download', [$file->id]) }}">{{ $file->filename }}</a></td>
-                            @if(Entrust::can('delete-file'))
-							<td><a href="{{ route('file.delete', [$file->id]) }}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
+							<td><a href="{{ route('attachment.download', [$attachment->id]) }}">{{ $attachment->filename }}</a></td>
+                            @if(Entrust::can('delete-attachment'))
+							<td><a href="{{ route('attachment.delete', [$attachment->id]) }}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
                             @endif
 						</tr>
 						@endforeach
@@ -52,8 +52,8 @@
                     </p>
                 @endif
 				
-                @if(Entrust::can('upload-file'))
-				<a href="{{ route('file.add', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Add file</a>
+                @if(Entrust::can('upload-attachment'))
+				<a href="{{ route('attachment.add', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Add file</a>
                 @endif
 			</p>
 		</div>
