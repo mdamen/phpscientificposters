@@ -94,7 +94,7 @@ class PosterController extends Controller
         $poster = $repository->storePoster($posterdata);
         
         // sync authors
-        $repository->addAuthorsByName($poster, array_filter($request->input('authors')));
+        $repository->syncAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
         $request->session()->flash('success', 'Poster successfully added');
@@ -124,7 +124,7 @@ class PosterController extends Controller
         $repository->updatePoster($poster);
         
         // sync authors
-        $repository->addAuthorsByName($poster, array_filter($request->input('authors')));
+        $repository->syncAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
         $request->session()->flash('success', 'Poster successfully updated');
