@@ -19,7 +19,7 @@ use App\Models\User;
 Route::bind(
     'poster',
     function($value) {
-        $object = Poster::withTrashed()->where("id", $value)->first();
+        $object = Poster::withTrashed()->find($value);
         
         if ($object) {
             return $object;
@@ -32,7 +32,7 @@ Route::bind(
 Route::bind(
     'attachment',
     function($value) {
-        $object = Attachment::withTrashed()->where("id", $value)->first();
+        $object = Attachment::withTrashed()->find($value);
         
         if ($object) {
             return $object;

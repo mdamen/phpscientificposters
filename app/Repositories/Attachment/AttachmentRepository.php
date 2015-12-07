@@ -25,9 +25,9 @@ class AttachmentRepository implements AttachmentRepositoryInterface
      */
     public function getDeletedAttachments($max = 0) {
         if (empty($max))
-            return Attachment::onlyTrashed()-get();
+            return Attachment::onlyTrashed();
         else
-            return Attachment::paginate($max)->onlyTrashed();
+            return Attachment::onlyTrashed()->paginate($max);
     }
     
     /**

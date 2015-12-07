@@ -33,9 +33,9 @@ class PosterRepository implements PosterRepositoryInterface
      */
     public function getDeletedPosters($max = 0) {
         if (empty($max))
-            return Poster::onlyTrashed()->get();
+            return Poster::onlyTrashed();
         else
-            return Poster::paginate($max)->onlyTrashed();
+            return Poster::onlyTrashed()->paginate($max);
     }
     
     /**
