@@ -113,8 +113,11 @@ class PosterController extends Controller
      */
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
+        // retrieve authors
+        $authors = array_filter($request->input('authors'));
+        
         // check if input is array
-        if (!is_array($request->input('authors'))) {
+        if (!is_array($authors)) {
             throw new \RuntimeException('$authors_to_process must be an array.');
         }
         
