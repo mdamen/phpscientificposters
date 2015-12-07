@@ -70,38 +70,30 @@ class AttachmentController extends Controller
      */
     public function upload(Request $request, Poster $poster)
     {
-        // getting all of the post data
-        $filevalidate = array('file' => Input::file('file'));
+        // get file from request
+        $file = $request->file('file');
         
         // setting up rules
         $rules = array('file' => 'required',);
         
         // doing the validation, passing post data, rules and the messages
-        $validator = Validator::make($filevalidate, $rules);
+        $validator = Validator::make(array('file' => $file), $rules);
         
         if ($validator->fails()) {
             return response()->json('error', 400);
         } else {
             // checking file is valid.
-            if (Input::file('file')->isValid()) {
-                // get file
-                $file = $request->file('file');
-                
-                // get original filename
-                $originalFilename   = $file->getClientOriginalName();
-                $originalExtension  = $file->getClientOriginalExtension();
-                $originalMime       = $file->getClientMimeType();
-                
+            if ($file->isValid()) {                
                 // create new file object and save
                 $attachment = new Attachment([
-                    'filename' => $originalFilename, 
-                    'extension' => $originalExtension, 
-                    'mime' => $originalMime
+                    'filename'  => $file->getClientOriginalName(), 
+                    'extension' => $file->getClientOriginalExtension(), 
+                    'mime'      => $file->getClientMimeType()
                 ]);
                 $poster->attachments()->save($attachment);
                 
-                // move uploaded file
-                $destination = 'uploads/' . $poster->id . '/' . $attachment->id . '.' . $originalExtension;
+                // store file
+                $destination = 'uploads/' . $poster->id . '/' . $attachment->id . '.' . $attachment->extension;
                 Storage::disk('local')->put($destination,  \Illuminate\Support\Facades\File::get($file));
                 
                 return response()->json('success', 201);
