@@ -13,6 +13,3 @@ interface AttachmentRepositoryInterface
      */
     public function deleteAttachment(Attachment $attachment);
 }
-
-
-?>

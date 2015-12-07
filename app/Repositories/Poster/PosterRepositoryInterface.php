@@ -72,6 +72,3 @@ interface PosterRepositoryInterface
      */
     public function detachAuthor(Poster $poster, Author $author);
 }
-
-
-?>

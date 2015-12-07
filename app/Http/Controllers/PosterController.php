@@ -42,11 +42,9 @@ class PosterController extends Controller
     }
     
     /**
-     * @param PosterRepositoryInterface $repository
-     *
      * @return Illuminate\View\View
      */
-    public function create(PosterRepositoryInterface $repository)
+    public function create()
     {
         return view('poster.create');
     }

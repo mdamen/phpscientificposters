@@ -15,5 +15,3 @@ class AttachmentRepository implements AttachmentRepositoryInterface
         $attachment->delete();
     }
 }
-
-?>

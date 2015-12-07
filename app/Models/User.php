@@ -17,9 +17,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string $username
  * @property string $password
  */
-class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, EntrustUserTrait;
 

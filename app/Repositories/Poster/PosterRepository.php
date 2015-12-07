@@ -121,5 +121,3 @@ class PosterRepository implements PosterRepositoryInterface
         $author->delete();
     }
 }
-
-?>
