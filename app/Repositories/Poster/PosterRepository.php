@@ -27,6 +27,18 @@ class PosterRepository implements PosterRepositoryInterface
     }
     
     /**
+     * @param int $max
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getDeletedPosters($max = 0) {
+        if (empty($max))
+            return Poster::onlyTrashed();
+        else
+            return Poster::onlyTrashed()->paginate($max);
+    }
+    
+    /**
      * @param array $data
      *
      * @return Poster
@@ -64,6 +76,24 @@ class PosterRepository implements PosterRepositoryInterface
      */
     public function deletePoster(Poster $poster) {
         $poster->delete();
+    }
+    
+    /**
+     * @param Poster $poster
+     *
+     * @return void
+     */
+    public function restorePoster(Poster $poster) {
+        $poster->restore();
+    }
+    
+    /**
+     * @param Poster $poster
+     *
+     * @return void
+     */
+    public function forceDeletePoster(Poster $poster) {
+        $poster->forceDelete();
     }
     
     /**

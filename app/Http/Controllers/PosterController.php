@@ -149,4 +149,40 @@ class PosterController extends Controller
         
         return redirect(route('poster.list'));
     }
+    
+    /**
+     * @param \Illuminate\Http\Request      $request
+     * @param PosterRepositoryInterface  $repository
+     * @param Poster                                      $poster
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function forcedelete(Request $request, PosterRepositoryInterface $repository, Poster $poster)
+    {
+        // delete poster
+        $repository->forceDeletePoster($poster);
+        
+        // flash message to session
+        $request->session()->flash('error', 'Poster permanently removed');
+        
+        return redirect()-back();
+    }
+    
+    /**
+     * @param \Illuminate\Http\Request  $request
+     * @param PosterRepositoryInterface $repository
+     * @param Poster                    $poster
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore(Request $request, PosterRepositoryInterface $repository, Poster $poster)
+    {
+        // delete poster
+        $repository->restorePoster($poster);
+        
+        // flash message to session
+        $request->session()->flash('error', 'Poster restored');
+        
+        return redirect()->back();
+    }
 }

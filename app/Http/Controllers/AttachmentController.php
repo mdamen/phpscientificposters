@@ -61,6 +61,44 @@ class AttachmentController extends Controller
         
         return redirect(route('poster.details', [$posterid]));
     }
+    
+    /**
+     * @param Request                       $request
+     * @param AttachmentRepositoryInterface $repository
+     * @param Attachment                    $attachment
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore(Request $request, AttachmentRepositoryInterface $repository, Attachment $attachment)
+    {
+        $repository->restoreAttachment($attachment);
+        
+        // flash message to session
+        $request->session()->flash('error', 'Attachment restored');
+        
+        return redirect()->back();
+    }
+    
+    /**
+     * @param Request                       $request
+     * @param AttachmentRepositoryInterface $repository
+     * @param Attachment                    $attachment
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function forcedelete(Request $request, AttachmentRepositoryInterface $repository, Attachment $attachment)
+    {
+        $attachmentPath = 'uploads/' . $attachment->poster->id . '/' . $attachment->id . '.' . $attachment->extension;
+        
+        $repository->forceDeleteAttachment($attachment);
+        
+        $storagePath = Storage::delete($attachmentPath);
+        
+        // flash message to session
+        $request->session()->flash('error', 'Attachment permanently deleted');
+        
+        return redirect()->back();
+    }
 
     /**
      * @param Request   $request

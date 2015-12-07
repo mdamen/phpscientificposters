@@ -20,6 +20,13 @@ interface PosterRepositoryInterface
     public function getPosters($max = 0);
     
     /**
+     * @param int $max
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getDeletedPosters($max = 0);
+    
+    /**
      * @param array $data
      *
      * @return Poster
@@ -39,6 +46,20 @@ interface PosterRepositoryInterface
      * @return void
      */
     public function deletePoster(Poster $poster);
+    
+    /**
+     * @param Poster $poster
+     *
+     * @return void
+     */
+    public function restorePoster(Poster $poster);
+    
+    /**
+     * @param Poster $poster
+     *
+     * @return void
+     */
+    public function forceDeletePoster(Poster $poster);
     
     /**
      * @param Poster $poster

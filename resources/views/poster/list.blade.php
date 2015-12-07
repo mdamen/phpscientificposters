@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('header')
-  <h1>
-    Posters
-  </h1>
+    <h1>
+        Posters
+    </h1>
 @stop
 
 @section('breadcrumbs')

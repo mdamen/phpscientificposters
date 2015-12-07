@@ -53,7 +53,7 @@
                         <div class="pull-right">
                             @if(Auth::check())
                             @if(Entrust::hasRole('admin'))
-                            <a href="#" class="btn">Recycle bin</a>
+                            <a href="{{ route('recyclebin') }}" class="btn">Recycle bin</a>
                             <a href="{{ route('user.list') }}" class="btn">User management</a>
                             @endif
                             <a href="{{ route('auth.logout') }}" class="btn btn-primary">Logout</a>
