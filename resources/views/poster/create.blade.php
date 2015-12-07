@@ -65,9 +65,6 @@
                             {!! Form::textarea('abstract', Input::old('abstract'), ['class' => 'form-control', 'rows' => '5']) !!}
 						</div>
                     </div>
-                    <div class="box-footer clearfix">
-                        {!! Form::submit('Add', ['class' => 'btn btn-sm btn-primary btn-flat pull-right']) !!}
-                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -91,9 +88,14 @@
                 </div>
             </div>
         </div>
-    </form>
+        <div class="row">
+            <div class="col-md-12">
+                {!! Form::submit('Add poster', ['class' => 'btn btn-sm btn-primary btn-flat']) !!}
+            </div>
+        </div>
+    {!! Form::close() !!}
     
-    <script language="text/javascript">
+    <script>
         var counter = 3;
         var limit = 10;
 

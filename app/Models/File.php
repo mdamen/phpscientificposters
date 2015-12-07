@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $poster_id
  * @property string $filename
  * @property string $extension
+ * @property string $mime
  * @property Poster $poster
  */
 class File extends Model

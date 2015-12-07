@@ -42,7 +42,7 @@
             </div><!-- /.table-responsive -->
         </div><!-- /.box-body -->
         
-        @if (Auth::check())
+        @if(Entrust::can('create-poster'))
         <div class="box-footer clearfix">
             <a href="{{ route('poster.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">Add poster</a>
         </div>

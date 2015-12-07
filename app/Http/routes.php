@@ -44,17 +44,16 @@ Route::bind(
 
 Route::get('/', array('as' => 'poster.list', 'uses' => 'PosterController@index'));
 Route::get('poster/details/{poster}', array('as' => 'poster.details', 'uses' => 'PosterController@details'));
-Route::get('poster/create', array('as' => 'poster.create', 'uses' => 'PosterController@create'));
-Route::post('poster/add', array('as' => 'poster.add', 'uses' => 'PosterController@add'));
-Route::get('poster/edit/{poster}', array('as' => 'poster.edit', 'uses' => 'PosterController@edit'));
-Route::post('poster/update/{poster}', array('as' => 'poster.update', 'uses' => 'PosterController@update'));
-Route::get('poster/delete/{poster}', array('as' => 'poster.delete', 'uses' => 'PosterController@delete'));
+Route::get('poster/create', array('as' => 'poster.create', 'uses' => 'PosterController@create', 'middleware' => ['permission:create-poster']));
+Route::post('poster/add', array('as' => 'poster.add', 'uses' => 'PosterController@add', 'middleware' => ['permission:create-poster']));
+Route::get('poster/edit/{poster}', array('as' => 'poster.edit', 'uses' => 'PosterController@edit', 'middleware' => ['permission:edit-poster']));
+Route::post('poster/update/{poster}', array('as' => 'poster.update', 'uses' => 'PosterController@update', 'middleware' => ['permission:edit-poster']));
+Route::get('poster/delete/{poster}', array('as' => 'poster.delete', 'uses' => 'PosterController@delete', 'middleware' => ['permission:delete-poster']));
 
-Route::get('file/add/{poster}', array('as' => 'file.add', 'uses' => 'FileController@add'));
-Route::get('file/delete/{file}', array('as' => 'file.delete', 'uses' => 'FileController@delete'));
-Route::post('file/upload/{poster}', array('as' => 'file.upload', 'uses' => 'FileController@upload'));
+Route::get('file/add/{poster}', array('as' => 'file.add', 'uses' => 'FileController@add', 'middleware' => ['permission:upload-file']));
+Route::get('file/delete/{file}', array('as' => 'file.delete', 'uses' => 'FileController@delete', 'middleware' => ['permission:upload-file']));
+Route::post('file/upload/{poster}', array('as' => 'file.upload', 'uses' => 'FileController@upload', 'middleware' => ['permission:delete-file']));
 Route::get('file/download/{file}', array('as' => 'file.download', 'uses' => 'FileController@download'));
 
-Route::get('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin'));
 Route::post('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin'));
 Route::get('auth/logout', array('as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout'));

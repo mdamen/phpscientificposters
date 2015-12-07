@@ -65,9 +65,6 @@
                             {!! Form::textarea('abstract', Input::old('abstract'), ['class' => 'form-control', 'rows' => '5']) !!}
 						</div>
 					</div>
-					<div class="box-footer clearfix">
-						{!! Form::submit('Save', ['class' => 'btn btn-sm btn-primary btn-flat pull-right']) !!}
-					</div>
 				</div>
             </div>
             <div class="col-md-6">
@@ -91,22 +88,27 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                {!! Form::submit('Save poster', ['class' => 'btn btn-sm btn-primary btn-flat']) !!}
+            </div>
+        </div>
     {!! Form::close() !!}
     
     <script>
-    var counter = {{ $poster->authors->count() }};
-    var limit = 10;
+        var counter = {{ $poster->authors->count() }};
+        var limit = 10;
 
-    function addInput(divName){
-        if (counter == limit)  {
-            alert("You have reached the limit of adding " + counter + " authors");
-        } else {
-            var newdiv = document.createElement('div');
-            newdiv.innerHTML = "<div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"authors[]\" placeholder=\"Author " + (counter+1) + "\"></div>";
-            document.getElementById(divName).appendChild(newdiv);
-            counter++;
+        function addInput(divName){
+            if (counter == limit)  {
+                alert("You have reached the limit of adding " + counter + " authors");
+            } else {
+                var newdiv = document.createElement('div');
+                newdiv.innerHTML = "<div class=\"form-group\"><input type=\"text\" class=\"form-control\" name=\"authors[]\" placeholder=\"Author " + (counter+1) + "\"></div>";
+                document.getElementById(divName).appendChild(newdiv);
+                counter++;
+            }
         }
-    }
     </script>
 
 	<script language="text/javascript">

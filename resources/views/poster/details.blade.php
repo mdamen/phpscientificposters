@@ -30,7 +30,7 @@
 				<table id="mytable" class="table table-bordred table-striped">
 					<thead>
 						<th>Filename</th>
-						@if (Auth::check())
+						@if(Entrust::hasRole('editor'))
                         <th>Actions</th>
                         @endif
 					</thead>
@@ -38,7 +38,7 @@
 						@foreach ($poster->files as $file)
 						<tr>
 							<td><a href="{{ route('file.download', [$file->id]) }}">{{ $file->filename }}</a></td>
-                            @if (Auth::check())
+                            @if(Entrust::can('delete-file'))
 							<td><a href="{{ route('file.delete', [$file->id]) }}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
                             @endif
 						</tr>
@@ -52,18 +52,22 @@
                     </p>
                 @endif
 				
-                @if (Auth::check())
+                @if(Entrust::can('upload-file'))
 				<a href="{{ route('file.add', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Add file</a>
                 @endif
 			</p>
 		</div>
 		<div class="col-sm-4">
-            @if (Auth::check())
+            @if(Entrust::hasRole('editor'))
 			<p>
 				<strong>Actions</strong>
 				<div class="btn-group" role="group" aria-label="...">
+                    @if(Entrust::can('edit-poster'))
 					<a href="{{ route('poster.edit', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Edit</a>
+                    @endif
+                    @if(Entrust::can('edit-poster'))
 					<a href="{{ route('poster.delete', [$poster->id]) }}" class="btn btn-sm btn-danger btn-flat">Delete</a>
+                    @endif
 				</div>
 			</p>
             @endif

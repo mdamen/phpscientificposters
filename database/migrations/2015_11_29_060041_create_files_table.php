@@ -17,6 +17,7 @@ class CreateFilesTable extends Migration
             $table->integer('poster_id')->unsigned();
             $table->string('filename');
             $table->string('extension');
+            $table->string('mime');
             
             $table->timestamps();
             $table->softDeletes();

@@ -149,6 +149,8 @@ return [
 
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		
+        Zizaco\Entrust\EntrustServiceProvider::class
+        
     ],
 
     /*
@@ -202,6 +204,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 		
 		'Breadcrumbs'   => DaveJamesMiller\Breadcrumbs\Facade::class,
+        
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class
 
     ],
 
