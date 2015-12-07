@@ -15,15 +15,7 @@ use App\Repositories\Poster\PosterRepositoryInterface;
  * @package App\Http\Controllers
  */
 class PosterController extends Controller
-{
-    /**
-     * Constructor to setup the authentication for this controller
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['index', 'details']]);
-    }
-    
+{    
     /**
      * @param PosterRepositoryInterface $repository
      *
