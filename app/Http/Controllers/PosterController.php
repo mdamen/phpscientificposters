@@ -15,11 +15,11 @@ use App\Repositories\Poster\PosterRepositoryInterface;
  * @package App\Http\Controllers
  */
 class PosterController extends Controller
-{    
+{
     /**
      * @param PosterRepositoryInterface $repository
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
      */
     public function index(PosterRepositoryInterface $repository)
     {
@@ -32,7 +32,7 @@ class PosterController extends Controller
      * @param UrlGenerator $urlgenerator
      * @param Poster       $poster
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
      */
     public function details(UrlGenerator $urlgenerator, Poster $poster)
     {
@@ -44,7 +44,7 @@ class PosterController extends Controller
     /**
      * @param PosterRepositoryInterface $repository
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
      */
     public function create(PosterRepositoryInterface $repository)
     {
@@ -55,7 +55,7 @@ class PosterController extends Controller
      * @param Request $request
      * @param Poster  $poster
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
      */
     public function edit(Request $request, Poster $poster)
     {

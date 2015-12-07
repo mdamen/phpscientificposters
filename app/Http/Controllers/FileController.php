@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
  * @package App\Http\Controllers
  */
 class FileController extends Controller
-{    
+{
     /**
      * @param File      $file
      *
@@ -37,7 +37,7 @@ class FileController extends Controller
     /**
      * @param Poster    $poster
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory
      */
     public function add(Poster $poster)
     {
@@ -74,7 +74,7 @@ class FileController extends Controller
         $filevalidate = array('file' => Input::file('file'));
         
         // setting up rules
-        $rules = array('file' => 'required',); //|mimes:jpeg,bmp,png,pdf
+        $rules = array('file' => 'required',);
         
         // doing the validation, passing post data, rules and the messages
         $validator = Validator::make($filevalidate, $rules);
