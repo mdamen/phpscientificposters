@@ -19,7 +19,7 @@ class PosterController extends Controller
     /**
      * @param PosterRepositoryInterface $repository
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Illuminate\View\View
      */
     public function index(PosterRepositoryInterface $repository)
     {
@@ -32,7 +32,7 @@ class PosterController extends Controller
      * @param UrlGenerator $urlgenerator
      * @param Poster       $poster
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Illuminate\View\View
      */
     public function details(UrlGenerator $urlgenerator, Poster $poster)
     {
@@ -44,7 +44,7 @@ class PosterController extends Controller
     /**
      * @param PosterRepositoryInterface $repository
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Illuminate\View\View
      */
     public function create(PosterRepositoryInterface $repository)
     {
@@ -55,7 +55,7 @@ class PosterController extends Controller
      * @param Request $request
      * @param Poster  $poster
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Illuminate\View\View
      */
     public function edit(Request $request, Poster $poster)
     {

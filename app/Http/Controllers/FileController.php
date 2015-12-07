@@ -37,7 +37,7 @@ class FileController extends Controller
     /**
      * @param Poster    $poster
      *
-     * @return \Illuminate\Contracts\View\Factory
+     * @return Illuminate\View\View
      */
     public function add(Poster $poster)
     {
