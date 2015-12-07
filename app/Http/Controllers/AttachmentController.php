@@ -88,11 +88,14 @@ class AttachmentController extends Controller
      */
     public function forcedelete(Request $request, AttachmentRepositoryInterface $repository, Attachment $attachment)
     {
+        //retrieve file location
         $attachmentPath = 'uploads/' . $attachment->poster->id . '/' . $attachment->id . '.' . $attachment->extension;
         
+        // delete database record
         $repository->forceDeleteAttachment($attachment);
         
-        $storagePath = Storage::delete($attachmentPath);
+        // delete file
+        Storage::delete($attachmentPath);
         
         // flash message to session
         $request->session()->flash('error', 'Attachment permanently deleted');

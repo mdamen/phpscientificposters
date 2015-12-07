@@ -23,8 +23,10 @@
                         @foreach ($posters as $poster)
                         <tr>
                             <td><a href="{{ route('poster.details', [$poster->id]) }}">{{ $poster->title }}</a></td>
-                            <td><a href="{{ route('poster.restore', [$poster->id]) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-share-alt"></span></a></td>
-                            <td><a href="{{ route('poster.forcedelete', [$poster->id]) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash"></span></a></td>
+                            <td>
+                                <a href="{{ route('poster.restore', [$poster->id]) }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-share-alt"></span></a>
+                                <a href="{{ route('poster.forcedelete', [$poster->id]) }}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
