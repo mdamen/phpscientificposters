@@ -7,6 +7,7 @@
 @stop
 
 @section('breadcrumbs')
+    {!! Breadcrumbs::render('poster.list') !!}
 @stop
 
 @section('content')        
@@ -14,7 +15,7 @@
         <div class="box-body">
             <div class="table-responsive">
                 @if(count($posters)>0) 
-                <table class="table no-margin">
+                <table class="table no-margin table-striped">
                     <thead>
                         <tr>
                             <th>Date</th>

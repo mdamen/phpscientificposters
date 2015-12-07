@@ -13,6 +13,7 @@
 
 use App\Models\Poster;
 use App\Models\Attachment;
+use App\Models\User;
 
 // models
 Route::bind(
@@ -28,11 +29,23 @@ Route::bind(
     }
 );
 
-// models
 Route::bind(
     'attachment',
     function($value) {
         $object = Attachment::find($value);
+        
+        if ($object) {
+            return $object;
+        }
+        
+        throw new NotFoundHttpException;
+    }
+);
+
+Route::bind(
+    'user',
+    function($value) {
+        $object = User::find($value);
         
         if ($object) {
             return $object;
@@ -57,3 +70,11 @@ Route::get('attachment/download/{attachment}', array('as' => 'attachment.downloa
 
 Route::post('auth/login', array('as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin'));
 Route::get('auth/logout', array('as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout'));
+
+Route::get('user', array('as' => 'user.list', 'uses' => 'UserController@index', 'middleware' => ['role:admin']));
+Route::get('user/details/{user}', array('as' => 'user.details', 'uses' => 'UserController@details', 'middleware' => ['role:admin']));
+Route::get('user/create', array('as' => 'user.create', 'uses' => 'UserController@create', 'middleware' => ['permission:create-user']));
+Route::post('user/add', array('as' => 'user.add', 'uses' => 'UserController@add', 'middleware' => ['permission:create-user']));
+Route::get('user/edit/{user}', array('as' => 'user.edit', 'uses' => 'UserController@edit', 'middleware' => ['permission:edit-user']));
+Route::post('user/update/{user}', array('as' => 'user.update', 'uses' => 'UserController@update', 'middleware' => ['permission:edit-user']));
+Route::get('user/delete/{user}', array('as' => 'user.delete', 'uses' => 'UserController@delete', 'middleware' => ['permission:delete-user']));

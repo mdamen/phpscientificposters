@@ -72,7 +72,18 @@ class PosterRepository implements PosterRepositoryInterface
      *
      * @return void
      */
-    public function addAuthorsByName(Poster $poster, array $authornames) {
+    public function syncAuthorsByName(Poster $poster, array $authornames) {
+        $authors_to_process = $this->removeAuthorsByName($poster, $authornames);
+        $this->addAuthorsByName($poster, $authors_to_process);
+    }
+    
+    /**
+     * @param Poster $poster
+     * @param array  $authornames
+     *
+     * @return void
+     */
+    private function addAuthorsByName(Poster $poster, array $authornames) {
         foreach($authornames as $authorname) {
             $this->attachAuthor($poster, new Author([
                 'name' => $authorname
@@ -86,7 +97,7 @@ class PosterRepository implements PosterRepositoryInterface
      *
      * @return array
      */
-    public function removeAuthorsByName(Poster $poster, array $authornames) {
+    private function removeAuthorsByName(Poster $poster, array $authornames) {
         $authors_to_process = $authornames;
         
         // remove authors not present anymore in form

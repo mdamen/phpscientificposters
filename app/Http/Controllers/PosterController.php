@@ -96,7 +96,7 @@ class PosterController extends Controller
         ];
         $poster = $repository->storePoster($posterdata);
         
-        // add authors
+        // sync authors
         $repository->addAuthorsByName($poster, $authors);
         
         // flash message to session
@@ -126,11 +126,8 @@ class PosterController extends Controller
         $poster->abstract       = $request->input('abstract');
         $repository->updatePoster($poster);
         
-        // remove authors not present in database
-        $authors_to_process = $repository->removeAuthorsByName($poster, array_filter($request->input('authors')));
-        
-        // add authors not present anymore in database
-        $repository->addAuthorsByName($poster, $authors_to_process);
+        // sync authors
+        $repository->addAuthorsByName($poster, $authors);
         
         // flash message to session
         $request->session()->flash('success', 'Poster successfully updated');
