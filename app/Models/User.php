@@ -13,9 +13,11 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
+ * @property int $id
  * @property string $name
  * @property string $username
  * @property string $password
+ * @property Collection $roles
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {

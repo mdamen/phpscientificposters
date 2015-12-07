@@ -51,12 +51,11 @@ class UserController extends Controller
     }
     
     /**
-     * @param Request $request
-     * @param User    $user
+     * @param User $user
      *
      * @return Illuminate\View\View
      */
-    public function edit(Request $request, User $user)
+    public function edit(User $user)
     {
         $roles = Role::all();
         return view('user.edit', compact('user', 'roles'));
