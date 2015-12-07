@@ -78,11 +78,8 @@ class PosterController extends Controller
      */
     public function add(PosterFormRequest $request, PosterRepositoryInterface $repository)
     {
-        // retrieve authors
-        $authors = array_filter($request->input('authors'));
-        
         // check if input is array
-        if (!is_array($authors)) {
+        if (!is_array($request->input('authors'))) {
             throw new \RuntimeException('$authors must be an array.');
         }
         
@@ -97,7 +94,7 @@ class PosterController extends Controller
         $poster = $repository->storePoster($posterdata);
         
         // sync authors
-        $repository->addAuthorsByName($poster, $authors);
+        $repository->addAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
         $request->session()->flash('success', 'Poster successfully added');
@@ -113,11 +110,8 @@ class PosterController extends Controller
      */
     public function update(PosterFormRequest $request, PosterRepositoryInterface $repository, Poster $poster)
     {
-        // retrieve authors
-        $authors = array_filter($request->input('authors'));
-        
         // check if input is array
-        if (!is_array($authors)) {
+        if (!is_array($request->input('authors'))) {
             throw new \RuntimeException('$authors_to_process must be an array.');
         }
         
@@ -130,7 +124,7 @@ class PosterController extends Controller
         $repository->updatePoster($poster);
         
         // sync authors
-        $repository->addAuthorsByName($poster, $authors);
+        $repository->addAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
         $request->session()->flash('success', 'Poster successfully updated');
