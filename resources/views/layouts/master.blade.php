@@ -89,7 +89,7 @@
                         <span class="icon-bar"></span>
                     </button>-->
                     
-                    <a class="navbar-brand" href="{{ route('poster.list') }}">Plasma & Materials Processing</a>
+                    <a class="navbar-brand" href="{{ route('poster.list') }}">{{ env('GROUP', 'Group name') }}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 </div><!--/.navbar-collapse -->
