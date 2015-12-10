@@ -89,7 +89,7 @@ class UserController extends Controller
         $repository->syncRolesByName($user, $roles);
 
         // flash message to session
-        $request->session()->flash('success', 'User successfully added');
+        $request->session()->flash('success', trans('user.flash.added'));
         
         return redirect(route('user.details', [$user->id]));
     }
@@ -125,7 +125,7 @@ class UserController extends Controller
         $repository->syncRolesByName($user, $roles);
         
         // flash message to session
-        $request->session()->flash('success', 'User successfully updated');
+        $request->session()->flash('success', trans('user.flash.updated'));
         
         return redirect(route('user.details', [$user->id]));
     }
@@ -141,14 +141,14 @@ class UserController extends Controller
     {
         // check if deletion is allowed
         if ($user->username == 'admin' || $user->username == Auth::user()->username) {
-            throw new \RuntimeException('Cannot delete the admin user or the currently logged in user');
+            throw new \RuntimeException(trans('user.flash.cannot_delete_user'));
         }
         
         // delete user
         $repository->deleteUser($user);
         
         // flash message to session
-        $request->session()->flash('error', 'User removed');
+        $request->session()->flash('error', trans('user.flash.removed'));
         
         return redirect(route('user.list'));
     }

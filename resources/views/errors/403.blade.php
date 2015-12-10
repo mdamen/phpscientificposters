@@ -2,7 +2,7 @@
 
 @section('header')
 	<h1>
-		Access denied
+		{{ trans('auth.title.denied') }}
 	</h1>
 @stop
 
@@ -10,7 +10,7 @@
     <div class="row">
 		<div class="col-sm-12">
             <p>
-                You don't have permission to access this page
+                {{ trans('auth.text.denied') }}
             </p>
         </div>
     </div>

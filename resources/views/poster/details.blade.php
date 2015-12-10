@@ -16,22 +16,22 @@
 			<p>{{ $poster->conference }} ({{ $poster->conference_at }})</p>
 			<p><i class="fa fa-envelope"></i> {{ $poster->contact_email }}</p>
             <p>
-				<strong>Authors:</strong><br />
+				<strong>{{ trans('poster.field.authors') }}</strong><br />
 				@foreach ($poster->authors as $author)
                 {{ $author->name }}<br />
                 @endforeach
 			</p>
 			<p>
-				<strong>Abstract:</strong><br />
+				<strong>{{ trans('poster.field.abstract') }}</strong><br />
 				<span id="abstract">{{ $poster->abstract }}</span>
 			</p>
 			<p>
                 @if(count($poster->attachments)>0) 
 				<table id="mytable" class="table table-bordred table-striped">
 					<thead>
-						<th>Filename</th>
+						<th>{{ trans('attachment.list.filename') }}</th>
 						@if(Entrust::hasRole('editor'))
-                        <th>Actions</th>
+                        <th>{{ trans('general.actions') }}</th>
                         @endif
 					</thead>
 					<tbody>
@@ -47,13 +47,13 @@
 				</table>
                 @else
                     <p>
-                        <strong>Files</strong><br />
-                        No files available
+                        <strong>{{ trans('attachment.files') }}</strong><br />
+                        {{ trans('attachment.list.empty') }}
                     </p>
                 @endif
 				
                 @if(Entrust::can('upload-attachment'))
-				<a href="{{ route('attachment.add', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Add file</a>
+				<a href="{{ route('attachment.add', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">{{ trans('attachment.button.add') }}</a>
                 @endif
 			</p>
 		</div>
@@ -63,16 +63,16 @@
 				<strong>Actions</strong>
 				<div class="btn-group" role="group" aria-label="...">
                     @if(Entrust::can('edit-poster'))
-					<a href="{{ route('poster.edit', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Edit</a>
+					<a href="{{ route('poster.edit', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">{{ trans('poster.button.edit') }}</a>
                     @endif
                     @if(Entrust::can('edit-poster'))
-					<a href="{{ route('poster.delete', [$poster->id]) }}" class="btn btn-sm btn-danger btn-flat">Delete</a>
+					<a href="{{ route('poster.delete', [$poster->id]) }}" class="btn btn-sm btn-danger btn-flat">{{ trans('poster.button.delete') }}</a>
                     @endif
 				</div>
 			</p>
             @endif
 			<p>
-				<strong>QR code</strong>
+				<strong>{{ trans('poster.details.qrcode') }}</strong>
 				<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl={{ urlencode($url) }}&choe=UTF-8&chld=H|0" alt="{{ $poster->title }}" class="img-responsive" />
 			</p>
 		</div>

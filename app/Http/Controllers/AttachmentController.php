@@ -57,7 +57,7 @@ class AttachmentController extends Controller
         $repository->deleteAttachment($attachment);
         
         // flash message to session
-        $request->session()->flash('error', 'Attachment deleted');
+        $request->session()->flash('error', trans('attachment.flash.deleted'));
         
         return redirect(route('poster.details', [$posterid]));
     }
@@ -74,7 +74,7 @@ class AttachmentController extends Controller
         $repository->restoreAttachment($attachment);
         
         // flash message to session
-        $request->session()->flash('error', 'Attachment restored');
+        $request->session()->flash('error', trans('attachment.flash.restored'));
         
         return redirect()->back();
     }
@@ -98,7 +98,7 @@ class AttachmentController extends Controller
         Storage::delete($attachmentPath);
         
         // flash message to session
-        $request->session()->flash('error', 'Attachment permanently deleted');
+        $request->session()->flash('error', trans('attachment.flash.deleted_permanently'));
         
         return redirect()->back();
     }

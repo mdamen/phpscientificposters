@@ -97,7 +97,7 @@ class PosterController extends Controller
         $repository->syncAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
-        $request->session()->flash('success', 'Poster successfully added');
+        $request->session()->flash('success', trans('poster.flash.added'));
         
         return redirect(route('poster.details', [$poster->id]));
     }
@@ -127,7 +127,7 @@ class PosterController extends Controller
         $repository->syncAuthorsByName($poster, array_filter($request->input('authors')));
         
         // flash message to session
-        $request->session()->flash('success', 'Poster successfully updated');
+        $request->session()->flash('success', trans('poster.flash.updated'));
         
         return redirect(route('poster.details', [$poster->id]));
     }
@@ -145,7 +145,7 @@ class PosterController extends Controller
         $repository->deletePoster($poster);
         
         // flash message to session
-        $request->session()->flash('error', 'Poster removed');
+        $request->session()->flash('error', trans('poster.flash.removed'));
         
         return redirect(route('poster.list'));
     }
@@ -163,7 +163,7 @@ class PosterController extends Controller
         $repository->forceDeletePoster($poster);
         
         // flash message to session
-        $request->session()->flash('error', 'Poster permanently removed');
+        $request->session()->flash('error', trans('poster.flash.removed_permanently'));
         
         return redirect()-back();
     }
@@ -181,7 +181,7 @@ class PosterController extends Controller
         $repository->restorePoster($poster);
         
         // flash message to session
-        $request->session()->flash('error', 'Poster restored');
+        $request->session()->flash('error', trans('poster.flash.restored'));
         
         return redirect()->back();
     }

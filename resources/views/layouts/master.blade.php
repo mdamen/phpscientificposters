@@ -53,10 +53,10 @@
                         <div class="pull-right">
                             @if(Auth::check())
                             @if(Entrust::hasRole('admin'))
-                            <a href="{{ route('recyclebin') }}" class="btn">Recycle bin</a>
-                            <a href="{{ route('user.list') }}" class="btn">User management</a>
+                            <a href="{{ route('recyclebin') }}" class="btn">{{ trans('recyclebin.button.recycle_bin') }}</a>
+                            <a href="{{ route('user.list') }}" class="btn">{{ trans('general.button.user_management') }}</a>
                             @endif
-                            <a href="{{ route('auth.logout') }}" class="btn btn-primary">Logout</a>
+                            <a href="{{ route('auth.logout') }}" class="btn btn-primary">{{ trans('auth.button.logout') }}</a>
                             @else                            
                                 {!! Form::open([
                                     'method' => 'POST', 
@@ -65,13 +65,13 @@
                                     {!! Form::token() !!}
                                     
                                     <div class="form-group">
-                                        {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => 'Username']) !!}
+                                        {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => trans('user.field.username')]) !!}
                                     </div>
                                     <div class="form-group">
-                                        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+                                        {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('user.field.password')]) !!}
                                     </div>
                                     
-                                    {!! Form::submit('Login', ['class' => 'btn btn-primary']) !!}
+                                    {!! Form::submit(trans('auth.button.login'), ['class' => 'btn btn-primary']) !!}
                                 </form>
                             @endif
                         </div>
@@ -127,8 +127,6 @@
                             {{ Session::get('info') }}
                         </div>
                         @endif
-                        
-                        
                         
                         @yield('content')
                     </div>

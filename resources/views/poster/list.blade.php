@@ -2,7 +2,7 @@
 
 @section('header')
     <h1>
-        Posters
+        {{ trans_choice('poster.title.posters', 2) }}
     </h1>
 @stop
 
@@ -18,10 +18,10 @@
                 <table class="table no-margin table-striped">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>Conference</th>
-                            <th>Author(s)</th>
-                            <th>Title</th>
+                            <th>{{ trans('poster.field.conference_at') }}</th>
+                            <th>{{ trans('poster.field.conference') }}</th>
+                            <th>{{ trans('poster.field.authors') }}</th>
+                            <th>{{ trans('poster.field.title') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,14 +38,14 @@
                 
                 {!! $posters->render() !!}
                 @else
-                    <p>No posters available</p>
+                    <p>{{ trans('poster.list.empty') }}</p>
                 @endif
             </div><!-- /.table-responsive -->
         </div><!-- /.box-body -->
         
         @if(Entrust::can('create-poster'))
         <div class="box-footer clearfix">
-            <a href="{{ route('poster.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">Add poster</a>
+            <a href="{{ route('poster.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">{{ trans('poster.button.add') }}</a>
         </div>
         @endif
     </div>

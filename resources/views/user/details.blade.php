@@ -14,18 +14,18 @@
     <div class="row">
 		<div class="col-sm-8">
 			<p>
-				<strong>Username:</strong><br />
+				<strong>{{ trans('user.field.username') }}</strong><br />
 				{{ $user->username }}
 			</p>
             
             <p>
-				<strong>Roles:</strong><br />
+				<strong>{{ trans('user.field.roles') }}</strong><br />
 				@if(count($user->roles)>0) 
                 <table class="table no-margin">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Description</th>
+                            <th>{{ trans('user.field.roles.name') }}</th>
+                            <th>{{ trans('user.field.roles.description') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +43,14 @@
 		<div class="col-sm-4">
             @if(Entrust::hasRole('admin'))
 			<p>
-				<strong>Actions</strong>
+				<strong>{{ trans('general.actions') }}</strong>
 				<div class="btn-group" role="group" aria-label="...">
                     @if(Entrust::can('edit-user'))
-					<a href="{{ route('user.edit', [$user->id]) }}" class="btn btn-sm btn-primary btn-flat">Edit</a>
+					<a href="{{ route('user.edit', [$user->id]) }}" class="btn btn-sm btn-primary btn-flat">{{ trans('user.button.edit') }}</a>
                     @endif
                     @if(Entrust::can('delete-user'))
                     @if($user->username != 'admin' && $user->username != Auth::user()->username)
-					<a href="{{ route('user.delete', [$user->id]) }}" class="btn btn-sm btn-danger btn-flat">Delete</a>
+					<a href="{{ route('user.delete', [$user->id]) }}" class="btn btn-sm btn-danger btn-flat">{{ trans('user.button.delete') }}</a>
                     @endif
                     @endif
 				</div>

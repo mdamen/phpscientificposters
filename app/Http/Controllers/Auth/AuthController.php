@@ -40,13 +40,13 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->has('remember')))
         {
             // flash message to session
-            $request->session()->flash('info', 'You have been logged in');
+            $request->session()->flash('info', trans('auth.flash.loggedin'));
         
             return back();
         }
         
         // show error message through flash message
-        $request->session()->flash('error', 'These credentials do not match an existing account');
+        $request->session()->flash('error', trans('auth.flash.loginfailed'));
         
         return redirect()->back()
             ->withInput($request->only('username', 'remember'));
@@ -65,7 +65,7 @@ class AuthController extends Controller
         Auth::logout();
         
         // flash message to session
-        $request->session()->flash('info', 'You have been logged out');
+        $request->session()->flash('info', trans('auth.flash.loggedout'));
         
         return redirect()->back();
     }

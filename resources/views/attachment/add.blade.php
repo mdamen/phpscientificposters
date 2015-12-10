@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('header')
-  <h1>
-		Add file to poster
-  </h1>
+    <h1>
+        {{ trans('attachment.title.upload') }}
+    </h1>
 @stop
 
 @section('breadcrumbs')
@@ -15,7 +15,7 @@
 		<div class="row">
 			<p>
 				<form action="{{ route('attachment.upload', [$poster->id]) }}" class="dropzone dz-clickable" id="my-awesome-dropzone" method="post" enctype="multipart/form-data">
-					<div class="dz-message">Drop files here or click to upload.</div>
+					<div class="dz-message">{{ trans('attachment.instruction.upload') }}</div>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 					<div class="fallback">
 						<input name="file" type="file" />
@@ -23,7 +23,7 @@
 					</div>
 				</form>
 			</p>
-			<p><a href="{{ route('poster.details', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">Done</a></p>
+			<p><a href="{{ route('poster.details', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">{{ trans('attachment.button.done') }}</a></p>
 		</div>
 	</div>
 @stop

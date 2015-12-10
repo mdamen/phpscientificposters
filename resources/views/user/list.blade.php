@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('header')
-  <h1>
-    Admin panel
-  </h1>
+    <h1>
+    {{ trans('user.title.users') }}
+    </h1>
 @stop
 
 @section('breadcrumbs')
@@ -18,10 +18,10 @@
                 <table class="table no-margin table-striped">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Username</th>
+                            <th>{{ trans('user.field.name') }}</th>
+                            <th>{{ trans('user.field.username') }}</th>
                             @if(Entrust::hasRole('admin'))
-                            <th>Actions</th>
+                            <th>{{ trans('general.actions') }}</th>
                             @endif
                         </tr>
                     </thead>
@@ -46,14 +46,14 @@
                 
                 {!! $users->render() !!}
                 @else
-                    <p>No users available</p>
+                    <p>{{ trans('user.list.empty') }}</p>
                 @endif
             </div><!-- /.table-responsive -->
         </div><!-- /.box-body -->
         
         @if(Entrust::can('create-user'))
         <div class="box-footer clearfix">
-            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">Add user</a>
+            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">{{ trans('user.button.add') }}</a>
         </div>
         @endif
     </div>

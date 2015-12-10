@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('header')
-  <h1>
-    Add user
-  </h1>
+    <h1>
+        {{ trans('user.title.add_user') }}
+    </h1>
 @stop
 
 @section('breadcrumbs')
@@ -34,19 +34,19 @@
             <div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">User details</h3>
+						<h3 class="box-title">{{ trans('user.form.details') }}</h3>
 					</div>
 					<div class="box-body">
 						{!! Form::token() !!}
                         
 						<div class="form-group">
-                            {!! Form::text('name', Input::old('name'), ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+                            {!! Form::text('name', Input::old('name'), ['class' => 'form-control', 'placeholder' => trans('user.field.name')]) !!}
 						</div>
 						<div class="form-group">
-                            {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => 'Username']) !!}
+                            {!! Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => trans('user.field.username')]) !!}
 						</div>
 						<div class="form-group">
-                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) !!}
+                            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => trans('user.field.password')]) !!}
                         </div>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
             <div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Roles</h3>
+						<h3 class="box-title">{{ trans('user.field.roles') }}</h3>
 					</div>
 					<div class="box-body">
 						@foreach($roles as $role)
@@ -69,7 +69,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                {!! Form::submit('Add user', ['class' => 'btn btn-sm btn-primary btn-flat']) !!}
+                {!! Form::submit(trans('user.button.add'), ['class' => 'btn btn-sm btn-primary btn-flat']) !!}
             </div>
         </div>
     {!! Form::close() !!}

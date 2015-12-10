@@ -2,7 +2,7 @@
 
 @section('header')
     <h1>
-        Recycle bin
+        {{ trans('recyclebin.title.recycle_bin') }}
     </h1>
 @stop
 
@@ -10,13 +10,13 @@
     <div class="box box-info">
         <div class="box-body">
             <div class="table-responsive">
-                <h2>Posters</h2>
+                <h2>{{ trans_choice('poster.title.posters', 2) }}</h2>
                 @if(count($posters)>0) 
                 <table class="table no-margin table-striped">
                     <thead>
                         <tr>
-                            <th>Poster</th>
-                            <th>Actions</th>
+                            <th>{{ trans_choice('poster.title.posters', 1) }}</th>
+                            <th>{{ trans('general.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,17 +34,17 @@
                 
                 {!! $posters->render() !!}
                 @else
-                    <p>No posters in recycle bin</p>
+                    <p>{{ trans('recyclebin.text.no_posters') }}</p>
                 @endif
                 
-                <h2>Files</h2>
+                <h2>{{ trans_choice('attachment.title.files', 2) }}</h2>
                 @if(count($attachments)>0) 
                 <table class="table no-margin table-striped">
                     <thead>
                         <tr>
-                            <th>Files</th>
-                            <th>Poster</th>
-                            <th>Actions</th>
+                            <th>{{ trans_choice('attachment.title.files', 1) }}</th>
+                            <th>{{ trans_choice('poster.title.posters', 1) }}</th>
+                            <th>{{ trans('general.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,7 @@
                 
                 {!! $attachments->render() !!}
                 @else
-                    <p>No files in recycle bin</p>
+                    <p>{{ trans('recyclebin.text.no_posters') }}</p>
                 @endif
             </div><!-- /.table-responsive -->
         </div><!-- /.box-body -->
