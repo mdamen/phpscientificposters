@@ -47,7 +47,7 @@
 				</table>
                 @else
                     <p>
-                        <strong>{{ trans('attachment.files') }}</strong><br />
+                        <strong>{{ trans_choice('attachment.title.files', 2) }}</strong><br />
                         {{ trans('attachment.list.empty') }}
                     </p>
                 @endif
@@ -60,7 +60,7 @@
 		<div class="col-sm-4">
             @if(Entrust::hasRole('editor'))
 			<p>
-				<strong>Actions</strong>
+				<strong>{{ trans('general.actions') }}</strong>
 				<div class="btn-group" role="group" aria-label="...">
                     @if(Entrust::can('edit-poster'))
 					<a href="{{ route('poster.edit', [$poster->id]) }}" class="btn btn-sm btn-primary btn-flat">{{ trans('poster.button.edit') }}</a>

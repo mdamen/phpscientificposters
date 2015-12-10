@@ -54,7 +54,7 @@
                             @if(Auth::check())
                             @if(Entrust::hasRole('admin'))
                             <a href="{{ route('recyclebin') }}" class="btn">{{ trans('recyclebin.button.recycle_bin') }}</a>
-                            <a href="{{ route('user.list') }}" class="btn">{{ trans('general.button.user_management') }}</a>
+                            <a href="{{ route('user.list') }}" class="btn">{{ trans('user.button.user_management') }}</a>
                             @endif
                             <a href="{{ route('auth.logout') }}" class="btn btn-primary">{{ trans('auth.button.logout') }}</a>
                             @else                            

@@ -80,7 +80,7 @@
                         
                         <div class="form-group">
                             <div class="box-footer clearfix">
-                                <input type="button" value="Add another author" onClick="addInput('dynamicInput');" class="btn btn-sm btn-primary btn-flat pull-right" >
+                                <input type="button" value="{{ trans('poster.button.add_author') }}" onClick="addInput('dynamicInput');" class="btn btn-sm btn-primary btn-flat pull-right" >
                             </div>
                         </div>
                     </div>

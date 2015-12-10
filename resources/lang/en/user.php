@@ -20,6 +20,7 @@ return [
     'button.save' => 'Save user',
     'button.edit' => 'Edit',
     'button.delete' => 'Delete',
+    'button.user_management' => 'User management',
     
     'flash.added' => 'User successfully added.',
     'flash.updated' => 'User successfully updated.',
@@ -27,5 +28,5 @@ return [
     'flash.removed_permanently' => 'User permanently removed.',
     'flash.restored' => 'User restored.',
     'flash.cannot_change_user' => 'You cannot change the roles of the admin user.',
-    'flash.cannot_delete_user', 'Cannot delete the admin user or the currently logged in user',
+    'flash.cannot_delete_user' => 'Cannot delete the admin user or the currently logged in user',
 ];
