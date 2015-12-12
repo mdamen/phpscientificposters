@@ -7,7 +7,7 @@
 @stop
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('user.list') !!}
+    <!--{!! Breadcrumbs::render('user.list') !!}-->
 @stop
 
 @section('content')

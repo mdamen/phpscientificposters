@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Sofa\Eloquence\Eloquence;
+use Venturecraft\Revisionable\RevisionableTrait;
+
 /**
  * @property int $id
  * @property string $title
@@ -18,6 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Poster extends Model
 {
     use SoftDeletes;
+    use Eloquence;
+    use RevisionableTrait;
     
     protected $fillable = ['title', 'conference', 'conference_at', 'contact_email', 'abstract'];
     protected $table = 'posters';

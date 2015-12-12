@@ -9,7 +9,9 @@
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "zizaco/entrust": "dev-laravel-5"
+        "zizaco/entrust": "dev-laravel-5",
+        "venturecraft/revisionable": "1.*",
+        "sofa/eloquence": "~5.1@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

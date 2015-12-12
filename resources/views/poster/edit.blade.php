@@ -73,8 +73,8 @@
                     </div>
                     <div class="box-body">
                         <div id="dynamicInput">
-                            @foreach ($authors as $author)
-                            <div class="form-group"><input type="text" class="form-control" name="authors[]" value="{{ $author }}" placeholder="{{ trans('poster.field.author') }}"></div>
+                            @foreach ($authors as $index => $author)
+                            <div class="form-group"><input type="text" class="form-control" name="authors[]" value="{{ $author }}" placeholder="{{ trans('poster.field.author') }} {{ $index+1 }}"></div>
                             @endforeach
                         </div>
                         

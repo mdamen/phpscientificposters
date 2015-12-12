@@ -60,7 +60,8 @@
                             @else                            
                                 {!! Form::open([
                                     'method' => 'POST', 
-                                    'route' => 'auth.login'
+                                    'route' => 'auth.login',
+                                    'class' => 'horizontal'
                                 ]) !!}
                                     {!! Form::token() !!}
                                     

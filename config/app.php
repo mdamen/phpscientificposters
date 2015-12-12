@@ -149,7 +149,9 @@ return [
 
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		
-        Zizaco\Entrust\EntrustServiceProvider::class
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        
+        Sofa\Eloquence\ServiceProvider::class
         
     ],
 

@@ -16,14 +16,20 @@ use App\Repositories\Poster\PosterRepositoryInterface;
  */
 class PosterController extends Controller
 {
+    private $pagination_count = 10;
+    
     /**
+     * @param Request                   $request
      * @param PosterRepositoryInterface $repository
      *
      * @return Illuminate\View\View
      */
-    public function index(PosterRepositoryInterface $repository)
+    public function index(Request $request, PosterRepositoryInterface $repository)
     {
-        $posters = $repository->getPosters(15);
+        if ($request->has('query'))
+            $posters = $repository->searchPosters($request->get('query'), $this->pagination_count);
+        else
+            $posters = $repository->getPosters($this->pagination_count);
         
         return view('poster.list', compact('posters'));
     }
@@ -42,11 +48,19 @@ class PosterController extends Controller
     }
     
     /**
+     * @param Request $request
+     *
      * @return Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('poster.create');
+        if (!empty($request->old('authors'))) {
+            $authors = old('authors');
+        } else {
+            $authors = array('', '', '');
+        }
+        
+        return view('poster.create', compact('authors'));
     }
     
     /**

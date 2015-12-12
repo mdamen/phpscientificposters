@@ -2,12 +2,6 @@
     padding: 10px 0px;
 }
 
-.header .form-group {
-    display: inline-block;
-    margin-bottom: 0px;
-    vertical-align: middle;
-}
-
 .navbar {
     background-color: #D60270;
 }
@@ -84,4 +78,10 @@ ol.breadcrumb li:before {
 ol.breadcrumb li.active {
     font-weight: normal;
     color: #767676 !important;
+}
+
+form.horizontal .form-group {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
 }

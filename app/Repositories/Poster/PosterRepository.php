@@ -20,10 +20,27 @@ class PosterRepository implements PosterRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getPosters($max = 0) {
-        if (empty($max))
-            return Poster::all();
+        $posters = Poster::orderBy('conference_at', 'desc')->orderBy('id', 'desc');
+        
+        if (!empty($max))
+            return $posters->paginate($max);
         else
-            return Poster::paginate($max);
+            return $posters->get();
+    }
+    
+    /**
+     * @param string $query
+     * @param int    $max
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function searchPosters($query, $max = 0) {
+        $posters = Poster::search($query, ['title' => 50, 'conference' => 40, 'authors.name' => 30, 'abstract' => 10], true, 5);
+
+        if (!empty($max))
+            return $posters->paginate($max);
+        else
+            return $posters->get();
     }
     
     /**
@@ -33,9 +50,9 @@ class PosterRepository implements PosterRepositoryInterface
      */
     public function getDeletedPosters($max = 0) {
         if (empty($max))
-            return Poster::onlyTrashed();
+            return Poster::onlyTrashed()->orderBy('deleted_at', 'desc');
         else
-            return Poster::onlyTrashed()->paginate($max);
+            return Poster::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($max);
     }
     
     /**

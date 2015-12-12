@@ -29,7 +29,7 @@
                 @if(count($poster->attachments)>0) 
 				<table id="mytable" class="table table-bordred table-striped">
 					<thead>
-						<th>{{ trans('attachment.list.filename') }}</th>
+						<th>{{ trans('attachment.field.filename') }}</th>
 						@if(Entrust::hasRole('editor'))
                         <th>{{ trans('general.actions') }}</th>
                         @endif

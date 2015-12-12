@@ -20,6 +20,14 @@ interface PosterRepositoryInterface
     public function getPosters($max = 0);
     
     /**
+     * @param string $query
+     * @param int    $max
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function searchPosters($query, $max = 0);
+    
+    /**
      * @param int $max
      *
      * @return \Illuminate\Database\Eloquent\Collection

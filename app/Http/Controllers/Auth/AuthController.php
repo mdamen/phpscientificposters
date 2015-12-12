@@ -12,6 +12,8 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 class AuthController extends Controller
 {
     use ThrottlesLogins;
+    
+    protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.
