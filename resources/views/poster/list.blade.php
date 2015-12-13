@@ -57,17 +57,25 @@
                     </tbody>
                 </table>
                 
-                {!! $posters->appends(['query' => Input::get('query')])->render() !!}
                 @else
                     <p>{{ trans('poster.list.empty') }}</p>
                 @endif
             </div><!-- /.table-responsive -->
         </div><!-- /.box-body -->
         
-        @if(Entrust::can('create-poster'))
         <div class="box-footer clearfix">
-            <a href="{{ route('poster.create') }}" class="btn btn-sm btn-primary btn-flat pull-left">{{ trans('poster.button.add') }}</a>
+            <div class="row">
+                <div class="col-md-6">
+                    {!! $posters->appends(['query' => Input::get('query')])->render() !!}
+                </div>
+                @if(Entrust::can('create-poster'))
+                <div class="col-md-6">
+                    <div class="pull-right">
+                        <a href="{{ route('poster.create') }}" class="btn btn-md btn-primary btn-flat pull-left">{{ trans('poster.button.add') }}</a>
+                    </div>
+                </div>
+                @endif
+            </div>
         </div>
-        @endif
     </div>
 @stop

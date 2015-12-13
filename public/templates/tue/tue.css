@@ -85,3 +85,7 @@ form.horizontal .form-group {
     margin-bottom: 0px;
     vertical-align: middle;
 }
+
+.box-footer .pagination {
+    margin: 0px;
+}
