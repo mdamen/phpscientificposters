@@ -13,8 +13,12 @@
 @section('content')
     <div class="row">
 		<div class="col-sm-8">
-			<p>{{ $poster->conference }} ({{ $poster->conference_at }})</p>
-			<p><i class="fa fa-envelope"></i> {{ $poster->contact_email }}</p>
+            <p>{{ $poster->authorline() }}</p>
+            <p><i class="fa fa-envelope"></i> {{ $poster->contact_email }}</p>
+			<p>
+                <strong>Conference</strong><br />
+                {{ $poster->conference }} ({{ $poster->conference_at }})
+            </p>
             <p>
 				<strong>{{ trans('poster.field.authors') }}</strong><br />
 				@foreach ($poster->authors as $author)

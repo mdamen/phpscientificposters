@@ -96,7 +96,7 @@
     
     <script>
         var counter = {{ $poster->authors->count() }};
-        var limit = 10;
+        var limit = 20;
 
         function addInput(divName){
             if (counter == limit)  {

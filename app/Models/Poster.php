@@ -49,13 +49,17 @@ class Poster extends Model
      *
      * Returns a text representation of max $max authors
      */
-    public function authorline($max)
+    public function authorline($max = 0)
     {
         // temp variable to store author names
         $authornames = array();
         
         // find the authors to include
-        $authors_to_include = array_slice($this->authors->all(), 0, $max);
+        if ($max > 0) {
+            $authors_to_include = array_slice($this->authors->all(), 0, $max);
+        } else {
+            $authors_to_include = $this->authors->all();
+        }
         
         // find the names of the included authors
         foreach($authors_to_include as $author_to_include) {
@@ -64,7 +68,7 @@ class Poster extends Model
         
         // construct author line
         $authorline = implode(", ", $authornames);
-        if($this->authors->count() > $max) {
+        if($max > 0  && $this->authors->count() > $max) {
             $authorline .= " et al.";
         }
         

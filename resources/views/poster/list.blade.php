@@ -31,9 +31,7 @@
     <!--{!! Breadcrumbs::render('poster.list') !!}-->
 @stop
 
-@section('content')
-    
-                        
+@section('content')      
     <div class="box box-info">
         <div class="box-body">
             <div class="table-responsive">
