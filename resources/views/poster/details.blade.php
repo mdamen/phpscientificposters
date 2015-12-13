@@ -19,12 +19,6 @@
                 <strong>Conference</strong><br />
                 {{ $poster->conference }} ({{ $poster->conference_at }})
             </p>
-            <p>
-				<strong>{{ trans('poster.field.authors') }}</strong><br />
-				@foreach ($poster->authors as $author)
-                {{ $author->name }}<br />
-                @endforeach
-			</p>
 			<p>
 				<strong>{{ trans('poster.field.abstract') }}</strong><br />
 				<span id="abstract">{{ $poster->abstract }}</span>
