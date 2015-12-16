@@ -1,8 +1,10 @@
 .rocketeer/
+.vagrant/
 
 /bootstrap/compiled.php
 .env.*.php
 .env.php
 .env
+
 
 /vendor

@@ -39,9 +39,9 @@
                 <table class="table no-margin table-striped">
                     <thead>
                         <tr>
-                            <th>{{ trans('poster.field.conference_at') }}</th>
-                            <th>{{ trans('poster.field.conference') }}</th>
-                            <th>{{ trans('poster.field.authors') }}</th>
+                            <th class="col-md-1">{{ trans('poster.field.conference_at') }}</th>
+                            <th class="col-md-2">{{ trans('poster.field.conference') }}</th>
+                            <th class="col-md-2">{{ trans('poster.field.authors') }}</th>
                             <th>{{ trans('poster.field.title') }}</th>
                         </tr>
                     </thead>
