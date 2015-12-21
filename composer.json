@@ -11,7 +11,8 @@
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "zizaco/entrust": "dev-laravel-5",
         "venturecraft/revisionable": "1.*",
-        "sofa/eloquence": "~5.1@dev"
+        "sofa/eloquence": "~5.1@dev",
+        "rachidlaasri/laravel-installer": "1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

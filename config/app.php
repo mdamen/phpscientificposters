@@ -151,7 +151,9 @@ return [
 		
         Zizaco\Entrust\EntrustServiceProvider::class,
         
-        Sofa\Eloquence\ServiceProvider::class
+        Sofa\Eloquence\ServiceProvider::class,
+        
+        RachidLaasri\LaravelInstaller\Providers\LaravelInstallerServiceProvider::class
         
     ],
 
