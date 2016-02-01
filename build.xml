@@ -8,6 +8,7 @@
  <property name="phploc" value="phploc"/>
  <property name="phpmd" value="phpmd"/>
  <property name="phpunit" value="phpunit"/>
+ <property name="composer" value="composer"/>
 
  <!-- Use this when the tools are located as PHARs in ${basedir}/build/tools
  <property name="pdepend" value="${basedir}/build/tools/pdepend.phar"/>
@@ -64,6 +65,9 @@
   <mkdir dir="${basedir}/build/logs"/>
   <mkdir dir="${basedir}/build/pdepend"/>
   <mkdir dir="${basedir}/build/phpdox"/>
+  <exec executable="${composer}" taskname="composer">
+   <arg value="install"/>
+  </exec>
   <property name="prepare.done" value="true"/>
  </target>
 
