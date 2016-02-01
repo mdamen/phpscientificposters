@@ -77,6 +77,7 @@
 
    <fileset dir="${basedir}">
     <include name="**/*.php"/>
+    <exclude name="**/vendor/**" />
     <modified/>
    </fileset>
 
@@ -94,6 +95,8 @@
    <arg value="--count-tests"/>
    <arg path="${basedir}"/>
    <arg path="${basedir}/tests"/>
+   <arg value="--exclude" />
+   <arg value="${basedir}/vendor" />
   </exec>
 
   <property name="phploc.done" value="true"/>
@@ -118,6 +121,7 @@
    <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
    <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
    <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
+   <arg value="--ignore=${basedir}/vendor" />
    <arg path="${basedir}"/>
   </exec>
 
@@ -129,6 +133,8 @@
    <arg path="${basedir}"/>
    <arg value="text"/>
    <arg path="${basedir}/build/phpmd.xml"/>
+   <arg value="--exclude" />
+   <arg value="${basedir}/vendor"/>
   </exec>
 
   <property name="phpmd.done" value="true"/>
@@ -141,6 +147,8 @@
    <arg path="${basedir}/build/phpmd.xml"/>
    <arg value="--reportfile"/>
    <arg path="${basedir}/build/logs/pmd.xml"/>
+   <arg value="--exclude" />
+   <arg value="${basedir}/vendor"/>
   </exec>
 
   <property name="phpmd.done" value="true"/>
@@ -151,6 +159,7 @@
    <arg value="--standard=PSR2"/>
    <arg value="--extensions=php"/>
    <arg value="--ignore=autoload.php"/>
+   <arg value="--ignore=${basedir}/vendor"/>
    <arg path="${basedir}"/>
    <arg path="${basedir}/tests"/>
   </exec>
@@ -165,6 +174,7 @@
    <arg value="--standard=PSR2"/>
    <arg value="--extensions=php"/>
    <arg value="--ignore=autoload.php"/>
+   <arg value="--ignore=${basedir}/vendor"/>
    <arg path="${basedir}"/>
    <arg path="${basedir}/tests"/>
   </exec>
@@ -174,6 +184,8 @@
 
  <target name="phpcpd" unless="phpcpd.done" description="Find duplicate code using PHPCPD and print human readable output. Intended for usage on the command line before committing.">
   <exec executable="${phpcpd}" taskname="phpcpd">
+   <arg value="--exclude" />
+   <arg value="${basedir}/vendor" />
    <arg path="${basedir}"/>
   </exec>
 
@@ -184,6 +196,8 @@
   <exec executable="${phpcpd}" taskname="phpcpd">
    <arg value="--log-pmd"/>
    <arg path="${basedir}/build/logs/pmd-cpd.xml"/>
+   <arg value="--exclude" />
+   <arg value="${basedir}/vendor" />
    <arg path="${basedir}"/>
   </exec>
 
