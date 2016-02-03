@@ -168,12 +168,6 @@
         <exec executable="${basedir}/vendor/phpunit/phpunit/phpunit" failonerror="true">
             <arg value="-c" />
             <arg value="${basedir}/phpunit.xml.dist" />
-            <arg value="--coverage-html" />
-            <arg value="${basedir}/build/coverage" />
-            <arg value="--coverage-clover" />
-            <arg value="${basedir}/build/logs/clover.xml" />
-            <arg value="--coverage-crap4j" />
-            <arg value="${basedir}/build/logs/crap4j.xml" />
         </exec>
     </target>
 
