@@ -7,7 +7,7 @@
  <property name="phpdox" value="phpdox"/>
  <property name="phploc" value="phploc"/>
  <property name="phpmd" value="phpmd"/>
- <property name="phpunit" value="vendor/phpunit/phpunit/phpunit"/>
+ <property name="phpunit" value="src/vendor/phpunit/phpunit/phpunit"/>
  <property name="composer" value="composer"/>
 
  <!-- Use this when the tools are located as PHARs in ${basedir}/build/tools
