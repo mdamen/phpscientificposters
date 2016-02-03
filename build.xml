@@ -170,6 +170,8 @@
             <arg value="${basedir}/phpunit.xml.dist" />
             <arg value="--coverage-html" />
             <arg value="${basedir}/build/coverage" />
+            <arg value="--coverage-clover" />
+            <arg value="${basedir}/build/logs/clover.xml" />
         </exec>
     </target>
 
