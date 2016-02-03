@@ -67,6 +67,8 @@
   <mkdir dir="${basedir}/build/phpdox"/>
   <exec executable="${composer}" taskname="composer">
    <arg value="install"/>
+   <arg value="--working-dir"/>
+   <arg value="src/"/>
   </exec>
   <property name="prepare.done" value="true"/>
  </target>
