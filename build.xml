@@ -75,7 +75,7 @@
   <apply executable="php" taskname="lint">
    <arg value="-l"/>
 
-   <fileset dir="${basedir}">
+   <fileset dir="${basedir}/src">
     <include name="**/*.php"/>
     <exclude name="**/vendor/**" />
     <modified/>
@@ -93,10 +93,10 @@
  <target name="phploc" unless="phploc.done" description="Measure project size using PHPLOC and print human readable output. Intended for usage on the command line.">
   <exec executable="${phploc}" taskname="phploc">
    <arg value="--count-tests"/>
-   <arg path="${basedir}"/>
+   <arg path="${basedir}/src"/>
    <arg path="${basedir}/tests"/>
    <arg value="--exclude" />
-   <arg value="${basedir}/vendor" />
+   <arg value="${basedir}/src/vendor" />
   </exec>
 
   <property name="phploc.done" value="true"/>
@@ -109,7 +109,7 @@
    <arg path="${basedir}/build/logs/phploc.csv"/>
    <arg value="--log-xml"/>
    <arg path="${basedir}/build/logs/phploc.xml"/>
-   <arg path="${basedir}"/>
+   <arg path="${basedir}/src"/>
    <arg path="${basedir}/tests"/>
   </exec>
 
@@ -121,8 +121,8 @@
    <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml"/>
    <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg"/>
    <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg"/>
-   <arg value="--ignore=${basedir}/vendor" />
-   <arg path="${basedir}"/>
+   <arg value="--ignore=${basedir}/src/vendor" />
+   <arg path="${basedir}/src"/>
   </exec>
 
   <property name="pdepend.done" value="true"/>
@@ -130,11 +130,11 @@
 
  <target name="phpmd" unless="phpmd.done" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
   <exec executable="${phpmd}" taskname="phpmd">
-   <arg path="${basedir}"/>
+   <arg path="${basedir}/src"/>
    <arg value="text"/>
    <arg path="${basedir}/build/phpmd.xml"/>
    <arg value="--exclude" />
-   <arg value="${basedir}/vendor"/>
+   <arg value="${basedir}/src/vendor"/>
   </exec>
 
   <property name="phpmd.done" value="true"/>
@@ -142,13 +142,13 @@
 
  <target name="phpmd-ci" unless="phpmd.done" depends="prepare" description="Perform project mess detection using PHPMD and log result in XML format. Intended for usage within a continuous integration environment.">
   <exec executable="${phpmd}" taskname="phpmd">
-   <arg path="${basedir}"/>
+   <arg path="${basedir}/src"/>
    <arg value="xml"/>
    <arg path="${basedir}/build/phpmd.xml"/>
    <arg value="--reportfile"/>
    <arg path="${basedir}/build/logs/pmd.xml"/>
    <arg value="--exclude" />
-   <arg value="${basedir}/vendor"/>
+   <arg value="${basedir}/src/vendor"/>
   </exec>
 
   <property name="phpmd.done" value="true"/>
@@ -159,8 +159,8 @@
    <arg value="--standard=PSR2"/>
    <arg value="--extensions=php"/>
    <arg value="--ignore=autoload.php"/>
-   <arg value="--ignore=${basedir}/vendor"/>
-   <arg path="${basedir}"/>
+   <arg value="--ignore=${basedir}/src/vendor"/>
+   <arg path="${basedir}/src"/>
    <arg path="${basedir}/tests"/>
   </exec>
 
@@ -174,8 +174,8 @@
    <arg value="--standard=PSR2"/>
    <arg value="--extensions=php"/>
    <arg value="--ignore=autoload.php"/>
-   <arg value="--ignore=${basedir}/vendor"/>
-   <arg path="${basedir}"/>
+   <arg value="--ignore=${basedir}/src/vendor"/>
+   <arg path="${basedir}/src"/>
    <arg path="${basedir}/tests"/>
   </exec>
 
@@ -185,8 +185,8 @@
  <target name="phpcpd" unless="phpcpd.done" description="Find duplicate code using PHPCPD and print human readable output. Intended for usage on the command line before committing.">
   <exec executable="${phpcpd}" taskname="phpcpd">
    <arg value="--exclude" />
-   <arg value="vendor" />
-   <arg path="${basedir}"/>
+   <arg value="src/vendor" />
+   <arg path="${basedir}/src"/>
   </exec>
 
   <property name="phpcpd.done" value="true"/>
@@ -197,8 +197,8 @@
    <arg value="--log-pmd"/>
    <arg path="${basedir}/build/logs/pmd-cpd.xml"/>
    <arg value="--exclude" />
-   <arg value="vendor" />
-   <arg path="${basedir}"/>
+   <arg value="src/vendor" />
+   <arg path="${basedir}/src"/>
   </exec>
 
   <property name="phpcpd.done" value="true"/>

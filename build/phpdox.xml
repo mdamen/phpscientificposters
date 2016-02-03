@@ -1,8 +1,8 @@
 <phpdox xmlns="http://xml.phpdox.net/config">
- <project name="poster" source=".." workdir="build/phpdox">
+ <project name="poster" source="src" workdir="build/phpdox">
   <collector publiconly="false">
    <include mask="*.php" />
-   <exclude mask="vendor/*"/>
+   <exclude mask="*/vendor/*"/>
   </collector>
 
   <generator output="build">
